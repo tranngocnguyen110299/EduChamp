@@ -1,0 +1,77 @@
+﻿@model TN_academic.Areas.Admin.Models.LectureModelForEdit
+
+@{
+    ViewBag.Title = "Edit Lecture";
+    ViewBag.Function = "Lectures";
+    ViewBag.ChildFunction = "Edit Lecture";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Lecture</h3>
+                    </div>
+                    @using (Html.BeginForm("Edit", "Lectures", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            <div class="card-body">
+                                @Html.HiddenFor(model => model.LectureID)
+                                @Html.HiddenFor(model => model.CourseID)
+                                <div style="color:red;font-size:20px;font-weight:bold">@ViewBag.Error</div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.LectureName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-sm-10">
+                                        @Html.EditorFor(model => model.LectureName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Lecture Name" } })
+                                        @Html.ValidationMessageFor(model => model.LectureName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Overview, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextAreaFor(model => model.Overview, new { @id = "summernote_Overview" })
+                                        @Html.ValidationMessageFor(model => model.Overview, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.Label("Video File", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" accept="video/*" name="VideoFile" id="VideoFile">
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                            @Html.ValidationMessageFor(model => model.VideoFile, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <a class="btn btn-default float-right" href="@Url.Action("Index", "Lectures", new { id = Model.CourseID })">Cancel</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section ScriptConfig
+{
+    @Styles.Render("~/asset/css/form")
+    @Scripts.Render("~/asset/scripts/form")
+
+    <script>
+        $(function () {
+            $('#summernote_Overview').summernote()
+        })
+    </script>
+}

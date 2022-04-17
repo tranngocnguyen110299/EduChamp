@@ -1,0 +1,54 @@
+﻿@{ 
+    var Courses = (List<TN_academic.Models.Category>)ViewBag.Courses;
+    var RecentCourses = (List<TN_academic.Models.Cours>)ViewBag.RecentCourses;
+}
+<div class="col-lg-3 col-md-4 col-sm-12 m-b30">
+    <div class="widget courses-search-bx placeani">
+        <form role="search" method="post" action="/Courses/Search">
+            <div class="form-group">
+                <div class="input-group">
+                    <label>Search Courses</label>
+                    <input name="txtSearch" type="text" class="form-control">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="widget widget_archive">
+        <h5 class="widget-title style-1">All Courses</h5>
+        <ul>
+            @foreach (var item in Courses)
+            {
+                <li><a href="@Url.Action("Category", "Courses", new {id = item.CategoryID })">@item.CategoryName</a></li>
+            }
+        </ul>
+    </div>
+    <div class="widget">
+        <a href="#"><img src="~/Content/assets/images/adv/adv.jpg" alt="" /></a>
+    </div>
+    <div class="widget recent-posts-entry widget-courses">
+        <h5 class="widget-title style-1">Recent Courses</h5>
+        <div class="widget-post-bx">
+
+            @foreach (var item in RecentCourses)
+            {
+                <div class="widget-post clearfix">
+                    <div class="ttr-post-media"> <img src="@Url.Content(item.Thumbnail)" width="200" height="143" alt=""> </div>
+                    <div class="ttr-post-info">
+                        <div class="ttr-post-header">
+                            <h6 class="post-title"><a href="@Url.Action("Details", "Courses", new {id = item.CourseID })">@item.CourseName</a></h6>
+                        </div>
+                        <div class="ttr-post-meta">
+                            <ul>
+                                <li class="price">
+                                    <h5>@string.Format("{0:N0}", (decimal)item.Price)₫</h5>
+                                </li>
+                                <li class="review">@item.CourseComments.Count Review</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

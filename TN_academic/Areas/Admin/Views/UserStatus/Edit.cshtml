@@ -1,0 +1,59 @@
+﻿@model TN_academic.Models.UserStatu
+
+@{
+    ViewBag.Title = "Edit User Status";
+    ViewBag.Function = "UserStatus";
+    ViewBag.ChildFunction = "Edit User Status";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit User Status</h3>
+                    </div>
+                    @using (Html.BeginForm("Edit", "UserStatus", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.StatusID)
+                        <div class="form-horizontal">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.StatusName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.StatusName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter status name" } })
+                                        @Html.ValidationMessageFor(model => model.StatusName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.IsBlock, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            @{
+                                                var selectListIsBlock = new SelectList(
+                                                    new List<SelectListItem>
+                                                    {
+                                                            new SelectListItem {Text = "block", Value = "true"},
+                                                            new SelectListItem {Text = "no", Value = "false"},}, "Value", "Text");
+                                            }
+                                            @Html.DropDownListFor(model => model.IsBlock, selectListIsBlock, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.IsBlock, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <a class="btn btn-default float-right" href="~/Admin/UserStatus">Cancel</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

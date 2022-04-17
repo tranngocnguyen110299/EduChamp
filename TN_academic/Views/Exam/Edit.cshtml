@@ -1,0 +1,66 @@
+﻿@model TN_academic.Models.Examination
+@{
+    ViewBag.Title = "Edit Examination";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner2.jpg";
+    ViewBag.BannerText = "Edit Examination";
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Examination</h3>
+                    </div>
+                    @using (Html.BeginForm("Edit", "Exam", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ExamID)
+                        <div class="form-horizontal">
+                            <div class="card-body">
+                                <div class="form-group row ">
+                                    @Html.LabelFor(model => model.ExamName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.ExamName, new { htmlAttributes = new { @class = "form-control", @placeholder = " Enter Examination Name" } })
+                                        @Html.ValidationMessageFor(model => model.ExamName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.CourseID, "CourseID", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownList("CourseID", null, htmlAttributes: new { @class = "form-control select2", @style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(model => model.CourseID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row ">
+                                    @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = " Enter Time (minutes)" } })
+                                        @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.ExaminationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <input type="datetime-local" class="form-control" value="@Html.DisplayFor(modelItem => modelItem.ExaminationDate)" name="ExaminationDate" />
+                                        @Html.ValidationMessageFor(model => model.ExaminationDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <a class="btn btn-default float-right" href="@Url.Action("Manage", "Exam")">Cancel</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

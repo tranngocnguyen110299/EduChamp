@@ -1,0 +1,41 @@
+﻿@model TN_academic.Models.Contact
+@{
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner2.jpg";
+    ViewBag.BannerText = "Contact Us";
+
+}
+
+<div class="page-banner contact-page">
+    <div class="container-fuild">
+        <div class="row m-lr0">
+            <div class="col-lg-6 col-md-6 p-lr0 d-flex">
+                <iframe src="@Model.Address" style="width:100%; width:100%; min-height: 300px;" allowfullscreen frameborder="0" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+            <div class="col-lg-6 col-md-6 section-sp2 p-lr30 bg-primary text-white contact-info-bx">
+
+
+                    <h2 class="m-b10 title-head">Contact <span>Information</span></h2>
+                    <p>Your Success is Our Success. Call Us For Superior Service.</p>
+                    <div class="widget widget_getintuch">
+                        <ul>
+                            <li><i class="ti-location-pin"></i>@Model.ContactName</li>
+                            <li><i class="ti-mobile"></i>@Model.Phone (24/7 Support Line)</li>
+                            <li><i class="ti-email"></i>@Model.Email</li>
+                        </ul>
+                    </div>
+                    <h5 class="m-t0 m-b20">Follow Us</h5>
+                    <ul class="list-inline contact-social-bx">
+                        <li><a href="https://www.facebook.com/sharer/sharer.php?u=" class="btn outline radius-xl"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://twitter.com/intent/tweet?text=" class="btn outline radius-xl"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" class="btn outline radius-xl"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="https://plus.google.com/share?url=" class="btn outline radius-xl"><i class="fa fa-google-plus"></i></a></li>
+                    </ul>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

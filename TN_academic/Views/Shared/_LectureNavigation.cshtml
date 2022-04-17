@@ -1,0 +1,36 @@
+﻿@{ 
+    var list = (List<TN_academic.Models.Lecture>)ViewBag.LectureList;
+}
+<div class="ttr-sidebar">
+    <div class="ttr-sidebar-wrapper content-scroll">
+        <div class="ttr-sidebar-logo">
+            <a href="@Url.Action("Index", "Home")"><img alt="" src="~/Content/assets/images/logo.png" width="122" height="27"></a>
+            <div class="ttr-sidebar-toggle-button">
+                <i class="ti-arrow-left"></i>
+            </div>
+        </div>
+        <nav class="ttr-sidebar-navi">
+            <ul>
+                @{
+                    foreach (var item in list)
+                    {
+                        <li>
+                            <a href="@Url.Action("Learn", "Courses", new { course = item.CourseID, lecture = item.LectureID })" class="ttr-material-button">
+                                @if (item.LectureName.Length > 32)
+                                {
+                                    <span class="ttr-label">@item.LectureName.Substring(0,32) ...</span>
+                                }
+                                else
+                                {
+                                    <span class="ttr-label">@item.LectureName</span>
+                                }
+
+                            </a>
+                        </li>
+                    }
+                }
+                <li class="ttr-seperate"></li>
+            </ul>
+        </nav>
+    </div>
+</div>

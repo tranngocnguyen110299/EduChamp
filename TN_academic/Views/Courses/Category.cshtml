@@ -1,0 +1,88 @@
+﻿@model PagedList.IPagedList<TN_academic.Models.Cours>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner2.jpg";
+    ViewBag.BannerText = "Courses";
+    var cart = (List<TN_academic.ViewModels.Cart>)Session["CART_SESSION"];
+}
+@if (Model.Count > 0)
+{
+    <div class="content-block">
+        <div class="section-area section-sp1">
+            <div class="container">
+                <div class="row">
+                    @{ Html.RenderAction("_CourseNavigation", "Courses"); }
+                    <div class="col-lg-9 col-md-8 col-sm-12">
+                        <div class="row">
+                            @{
+                                foreach (var item in Model)
+                                {
+                                    <div class="col-md-6 col-lg-4 col-sm-6 m-b30">
+                                        <div class="cours-bx">
+                                            <div class="action-box">
+                                                <img src="@Url.Content(item.Thumbnail)" style="width:290px; height:174px" alt="">
+                                                @if (cart != null)
+                                                {
+                                                    if (cart.Exists(m => m.Course.CourseID == item.CourseID))
+                                                    {
+                                                        <a href="~/Cart" class="btn">Go to cart</a>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="~/Cart/addItem?id=@item.CourseID" class="btn">Add to cart</a>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <a href="~/Cart/addItem?id=@item.CourseID" class="btn">Add to cart</a>
+                                                }
+                                            </div>
+                                            <div class="info-bx text-center">
+                                                <h5><a href="@Url.Action("Details", "Courses", new {id = item.CourseID })">@item.CourseName</a></h5>
+                                                <span>@item.Category.CategoryName</span>
+                                            </div>
+                                            <div class="cours-more-info">
+                                                <div class="review">
+                                                    <span>@item.CourseComments.Count Reviews</span>
+                                                    <ul class="cours-star">
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price">
+                                                    <del>@string.Format("{0:N0}", (decimal)item.OldPrice) ₫</del>
+                                                    <h5>@string.Format("{0:N0}", (decimal)item.Price)₫</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            <div class="col-lg-12 m-b20">
+                                <div class="pagination-bx rounded-sm gray clearfix">
+                                    @Html.PagedListPager(Model, page => Url.Action("Index",
+                                     new { id = ViewBag.CurrentBlogCate, page }))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+<section class="checkout spad">
+    <div class="container">
+        <h2 style="padding-top:5%;padding-bottom: 5%">Sorry! No results found!</h2>
+    </div>
+</section>
+}

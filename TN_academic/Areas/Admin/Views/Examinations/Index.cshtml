@@ -1,0 +1,119 @@
+﻿@model IEnumerable<TN_academic.Models.Examination>
+
+@{
+    ViewBag.Title = "Manage Examinations";
+    ViewBag.Manage = "Manage Examinations";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string isChecked = "";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data of Examinations</h3>
+                <p>
+                    <a class="btn btn-success btn-sm float-right" href="~/Admin/Examinations/Create">
+                        <i class="fas fa-plus">
+                        </i>
+                        Create New
+                    </a>
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="tbl_Examination" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExamName)
+                            </th>
+                            <th>
+                                Questions
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Cours.CourseName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Time)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExaminationDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExamName)
+                                </td>
+                                <td>
+                                    @item.ExaminationContents.Count
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cours.CourseName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Time) minutes
+                                </td>
+                                <td>
+                                    @item.ExaminationDate.Value.ToString("dd/MM/yyyy HH:mm")
+                                </td>
+                                <td>
+                                    @if (item.Status == 1)
+                                    {
+                                        isChecked = "checked";
+                                    }
+                                    else
+                                    {
+                                        isChecked = "";
+                                    }
+                                    <input type="checkbox" data-id="@item.ExamID" data-on-text="open" data-off-text="close" id="chkStatus" name="my-checkbox" @isChecked data-bootstrap-switch data-off-color="info" data-on-color="success">
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-primary btn-sm btn-block" href="@Url.Action("Details", "Examinations", new { id = item.ExamID })">
+                                        <i class="fas fa-eye">
+                                        </i>
+                                        View
+                                    </a>
+                                    <a class="btn btn-info btn-sm btn-block" href="@Url.Action("Edit", "Examinations", new { id = item.ExamID })">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Edit
+                                    </a>
+                                </td>
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-success btn-sm btn-block" href="@Url.Action("AddQuestions", "Examinations", new { examId = item.ExamID })">
+                                        <i class="fas fa-question">
+                                        </i>
+                                        Question
+                                    </a>
+                                    <a class="btn btn-danger btn-sm btn-block" href="@Url.Action("Delete", "Examinations", new { id = item.ExamID })">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section ScriptConfig
+{
+    @Styles.Render("~/asset/css/datatable")
+    @Scripts.Render("~/asset/scripts/datatable")
+    <script src="~/Asset/ajaxChangeSatus/examination.js"></script>
+}

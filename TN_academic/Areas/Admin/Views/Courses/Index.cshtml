@@ -1,0 +1,133 @@
+﻿@model IEnumerable<TN_academic.Models.Cours>
+
+@{
+    ViewBag.Title = "Manage Courses";
+    ViewBag.Manage = "Manage Courses";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string isChecked = "";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data of Courses</h3>
+                <p>
+                    <a class="btn btn-success btn-sm float-right" href="@Url.Action("Create", "Courses")">
+                        <i class="fas fa-plus">
+                        </i>
+                        Create New
+                    </a>
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="tbl_Course" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CourseName)
+                            </th>
+                            <th>
+                                Instructor
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Category.CategoryName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Price)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Quantity)
+                            </th>
+                            <th>
+                                Members
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Thumbnail)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CourseName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderDetails.Count)
+                                </td>
+                                <td>
+                                    <img src="@Url.Content(item.Thumbnail)" width="100" height="100" />
+                                </td>
+                                <td>
+                                    @if (item.Status == 0)
+                                    {
+                                        isChecked = "";
+                                    }
+                                    else
+                                    {
+                                        isChecked = "checked";
+                                    }
+                                    <input type="checkbox" data-id="@item.CourseID" data-on-text="open" data-off-text="close" id="chkStatus" name="my-checkbox" @isChecked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                </td>
+
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm btn-block" href="~/Admin/Courses/Details/@item.CourseID">
+                                        <i class="fas fa-eye">
+                                        </i>
+                                        View
+                                    </a>
+                                    <a class="btn btn-info btn-sm btn-block" href="~/Admin/Courses/Edit/@item.CourseID">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Edit
+                                    </a>
+                                </td>
+                                <td class="project-actions text-right">
+
+                                    <a class="btn btn-danger btn-sm btn-block" href="~/Admin/Courses/Delete/@item.CourseID">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </a>
+                                    <a class="btn btn-success btn-sm btn-block" href="~/Admin/Lectures/Index/@item.CourseID">
+                                        <i class="fas fa-book">
+                                        </i>
+                                        Lecture
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section ScriptConfig
+{
+    @Styles.Render("~/asset/css/datatable")
+    @Scripts.Render("~/asset/scripts/datatable")
+    <script src="~/Asset/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="~/Asset/ajaxChangeSatus/courses.js"></script>
+}

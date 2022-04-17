@@ -1,0 +1,215 @@
+﻿
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="~/admin" class="brand-link">
+        <img src="~/Content/dashboard/images/logo-mobile.png" alt="" class="brand-image img-circle elevation-3" style="opacity: .8" />
+        <span class="brand-text font-weight-light">Admin Dashboard</span>
+    </a>
+
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="@Url.Content(ViewBag.Avatar)" class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+                <a href="~/admin/profile" class="d-block">@ViewBag.FullName</a>
+            </div>
+        </div>
+
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item menu-open">
+                    <a href="~/Admin/Home" class="nav-link">
+                        <img src="~/public/icons/icons8-dashboard-30.png" />
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <img src="~/public/icons/application.png" />
+                        <p>
+                            Application
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="~/Admin/Contacts" class="nav-link">
+                                <img src="~/public/icons/contact.png" />
+                                <p>Contacts</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/Admin/AboutUs" class="nav-link">
+                                <img src="~/public/icons/aboutUs.png" />
+                                <p>About Us</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/Admin/Payments" class="nav-link">
+                                <img src="~/public/icons/payment.png" />
+                                <p>Manage Payment</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <img src="~/public/icons/courseManage.png" />
+                        <p>
+                            Manage Course
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="~/Admin/Categories" class="nav-link">
+                                    <img src="~/public/icons/courseCategory.png" />
+                                    <p>Course Categories</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/Coupons" class="nav-link">
+                                    <img src="~/public/icons/coupon.png" />
+                                    <p>Coupons</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/Courses" class="nav-link">
+                                    <img src="~/public/icons/course.png" />
+                                    <p>Courses</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/CourseComments" class="nav-link">
+                                    <img src="~/public/icons/commentCourse.png" />
+                                    <p>Course Comments</p>
+                                </a>
+                            </li>
+
+
+                        <li class="nav-item">
+                            <a href="~/Admin/LectureComments" class="nav-link">
+                                <img src="~/public/icons/commentLecture.png" />
+                                <p>Lecture Comments</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="~/public/icons/userManage.png" />
+                            <p>Manage Users</p>
+                            <i class="fas fa-angle-left right"></i>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="~/Admin/Administrators" class="nav-link">
+                                    <img src="~/public/icons/administrator.png" />
+                                    <p>Administrators</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/Instructors" class="nav-link">
+                                    <img src="~/public/icons/instructor.png" />
+                                    <p>Instructors</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/Students" class="nav-link">
+                                    <img src="~/public/icons/student.png" />
+                                    <p>Students</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="~/Admin/Orders/" class="nav-link">
+                            <img src="~/public/icons/register.png" />
+                            <p>Manage Orders</p>
+                        </a>
+                    </li>
+
+
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <img src="~/public/icons/examManage.png" />
+                        <p>Manage Examination</p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="~/Admin/QuestionTypes" class="nav-link">
+                                <img src="~/public/icons/questionType.png" />
+                                <p>Question Types</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/Admin/Questions" class="nav-link">
+                                <img src="~/public/icons/question.png" />
+                                <p>Questions</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/Admin/Examinations" class="nav-link">
+                                <img src="~/public/icons/examinition.png" />
+                                <p>Examination</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <img src="~/public/icons/blogmanage.png" />
+                        <p>
+                            Manage Blogs
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="~/Admin/BlogCategories" class="nav-link">
+
+                                    <img src="~/public/icons/blogCategory.png" />
+                                    <p>Blog Catagories</p>
+                                </a>
+                            </li>
+
+                        <li class="nav-item">
+                            <a href="~/Admin/Blogs" class="nav-link">
+                                <img src="~/public/icons/blog.png" />
+                                <p>Blogs</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/Admin/BlogComments" class="nav-link">
+                                <img src="~/public/icons/blogComment.png" />
+                                <p>Blog Comments</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="@Url.Action("Logout", "Login")" class="nav-link">
+                        <img src="~/public/icons/icons8-sign-out-30.png" />
+                        <p>Logout</p>
+                    </a>
+                </li>
+
+
+            </ul>
+        </nav>
+    </div>
+</aside>
+

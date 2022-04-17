@@ -1,0 +1,123 @@
+﻿@model PagedList.IPagedList<TN_academic.Models.BlogComment>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner2.jpg";
+    ViewBag.BannerText = "Blog Detail";
+    var blog = (TN_academic.Models.Blog)ViewBag.BlogDetail;
+}
+
+<div class="content-block">
+    <div class="section-area section-sp1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-xl-8">
+
+                    <div class="recent-news blog-lg">
+                        <div class="action-box blog-lg">
+                            <img src="@Url.Content(blog.Thumbnail)" alt="">
+                        </div>
+                        <div class="info-bx">
+                            <ul class="media-post">
+                                <li><a href="javascript:;"><i class="fa fa-calendar"></i>@blog.CreatedDate</a></li>
+                                <li><a href="#comments"><i class="fa fa-comments-o"></i>@blog.BlogComments.Count Comment</a></li>
+                            </ul>
+                            <h5 class="post-title"><a href="javascript:;">@blog.BlogName</a></h5>
+                            <p>@Html.Raw(blog.Content)</p>
+                            <div class="ttr-divider bg-gray"><i class="icon-dot c-square"></i></div>
+                            <h6>SHARE </h6>
+                            <ul class="list-inline contact-social-bx">
+                                <li><a href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" class="btn outline radius-xl"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/intent/tweet?text=" class="btn outline radius-xl"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" class="btn outline radius-xl"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="https://plus.google.com/share?url=" class="btn outline radius-xl"><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
+                            <div class="ttr-divider bg-gray"><i class="icon-dot c-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="clear" id="comment-list">
+                        <div class="comments-area" id="comments">
+                            <h2 class="comments-title">@blog.BlogComments.Count Comments</h2>
+                            <div class="clearfix m-b20">
+                                <ol class="comment-list">
+                                    @foreach (var item in Model)
+                                    {
+                                        <li class="comment">
+                                            <div class="comment-body">
+                                                <div class="comment-author vcard"> <img class="avatar photo" src="@Url.Content(item.User.Avatar)" alt=""> <cite class="fn">@item.User.FirstName @item.User.LastName</cite> <span class="says">says:</span> </div>
+                                                <div class="comment-meta"> <a href="#">@item.CreatedDate</a> </div>
+                                                <p>
+                                                    @Html.Raw(item.Content)
+                                                </p>
+                                                <div class="reply" onclick="myFunction(@item.CommentID, @blog.BlogID)"><a style="cursor:pointer" class="comment-reply-link">Reply</a></div>
+                                                <div id="myReply_@item.CommentID"></div>
+                                            </div>
+
+                                            <ol class="children">
+                                                <li class="comment odd parent">
+                                                    @foreach (var i in item.ReplyingBlogComments)
+                                                    {
+                                                        if (i.Status == 1)
+                                                        {
+                                                            <div class="comment-body">
+                                                                <div class="comment-author vcard"> <img class="avatar photo" src="@Url.Content(i.User.Avatar)" alt=""> <cite class="fn">@i.User.FirstName @i.User.LastName</cite> <span class="says">says:</span> </div>
+                                                                <div class="comment-meta"> <a href="javascript:;">@i.CreatedDate</a> </div>
+                                                                <p>
+                                                                    @Html.Raw(i.Content)
+                                                                </p>
+
+                                                            </div>
+                                                        }
+                                                    }
+                                                </li>
+                                            </ol>
+                                        </li>
+                                    }
+                                </ol>
+                                <div class="pagination-bx rounded-sm gray clearfix">
+                                    @Html.PagedListPager(Model, page => Url.Action("Details",
+                                    new { id = blog.BlogID, page }))
+                                </div>
+                                <br />
+                                <div class="comment-respond" id="respond">
+                                    <h4 class="comment-reply-title" id="reply-title">Leave a Reply <small> <a style="display:none;" href="#" id="cancel-comment-reply-link" rel="nofollow">Cancel reply</a> </small> </h4>
+                                    @using (Html.BeginForm("Comment", "Blogs", FormMethod.Post, new { @class = "comment-form", @id = "commentform", enctype = "multipart/form-data" }))
+                                    {
+                                        <p class="comment-form-comment">
+                                            <label for="comment">Comment</label>
+                                            <textarea rows="8" name="comment" id="summernote"></textarea>
+                                            @Html.Hidden("blogID", blog.BlogID)
+                                        </p>
+                                        <p class="form-submit">
+                                            <input type="submit" value="Submit Comment" class="submit" id="submit" name="submit">
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @{Html.RenderAction("_BlogSlideBar", "Blogs");}
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ClientScript
+{
+    <script src="~/Asset/plugins/summernote/summernote-bs4.min.js"></script>
+    <link href="~/Asset/plugins/summernote/summernote-bs4.min.css" rel="stylesheet" />
+
+    <script>
+        function myFunction(id, blogID) {
+            document.getElementById("myReply_" + id).innerHTML = '<form class="comment-form" id="commentform" action="/Blogs/Reply" method="post"><p class="comment-form-comment"><input type="text" value="" id="content" name="content" placeholder="Reply comment" ></p><input type="hidden" id="commentID" name="commentID" value="' + id + '"><input type="hidden" id="blogID" name="blogID" value="' + blogID + '"><p class="form-submit"><input type="submit" value="Reply" class="submit" id="submit" name="submit"></p></form><br/>';
+        }
+
+        $(function () {
+            $('#summernote').summernote()
+
+        })
+
+    </script>
+}

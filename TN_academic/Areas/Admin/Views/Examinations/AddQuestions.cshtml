@@ -1,0 +1,898 @@
+﻿@model TN_academic.Models.Question
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var exam = (TN_academic.Models.Examination)Session["TEMPORARY_EXAMINATION"];
+    var list = (List<TN_academic.Models.Question>)ViewBag.QuestionList;
+    var contents = (List<TN_academic.Models.ExaminationContent>)ViewBag.Contents;
+    var level = (SelectList)ViewBag.Level;
+    int number = 1;
+    ViewBag.Title = "Examination - " + exam.ExamName;
+    ViewBag.Function = "Examinations";
+    ViewBag.ChildFunction = "Add Questions";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <h3 class="profile-username text-center">@exam.ExamName</h3>
+                        <ul class="list-group list-group-unbordered mb-3">
+                            @{
+                                foreach (var item in contents)
+                                {
+                                    <li class="list-group-item">
+                                        <b>Question @(number++)</b>
+                                        <a class="btn btn-sm float-right" data-toggle="modal" data-target="#modal-delete-@item.QuestionID-@item.ExamID" href="#"><i class="fas fa-trash"></i></a>
+
+                                        <div class="modal fade" id="modal-delete-@item.QuestionID-@item.ExamID">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">DELETE - Question @(number-1)</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    @using (Html.BeginForm("DeleteQuestion", "Examinations", FormMethod.Post))
+                                                    {
+                                                        <div class="modal-body">
+                                                            <h3 class="text-center">Are you sure you want to delete this?</h3>
+                                                            @Html.Hidden("questionId", item.QuestionID)
+                                                            @Html.Hidden("examId", exam.ExamID)
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <a class="btn btn-sm float-right" data-toggle="modal" data-target="#modal-edit-mark-@item.QuestionID-@item.ExamID" href="#"><i class="fas fa-pen-alt"></i></a>
+                                        <div class="modal fade" id="modal-edit-mark-@item.QuestionID-@item.ExamID">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Enter the mark for the question</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    @using (Html.BeginForm("EditMarkOfTheQuestion", "Examinations", FormMethod.Post))
+                                                    {
+                                                        <div class="modal-body">
+                                                            @Html.Hidden("questionId", item.QuestionID)
+                                                            @Html.Hidden("examId", exam.ExamID)
+                                                            @Html.TextBox("mark", null, htmlAttributes: new { @class = "form-control", @Value = item.Mark, @placeholder = "Enter the mark for the question", @type = "number", @min = "1", @required = "required" })
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="submit" class="btn btn-success">Save</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="btn btn-sm float-right" data-toggle="modal" data-target="#modal-content-@item.QuestionID-@item.ExamID" href="#"><i class="fas fa-eye"></i></a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#normal" data-toggle="tab">Normal Question</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#listen" data-toggle="tab">Listening Question</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#image" data-toggle="tab">Image Question</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#available" data-toggle="tab">Available Question</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="normal">
+                                @using (Html.BeginForm("AddQuestions", "Examinations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-horizontal">
+                                        <div class="card-body">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div style="color:red;font-size:20px;font-weight:bold">@ViewBag.Error</div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Description Of The Question", @Value = "Read the question below and choose the best answer", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(model => model.Content, new { @id = "summernote_Description", @required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceA, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceA, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice A", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceA, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceB, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceB, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice B", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceB, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceC, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceC, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice C", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceC, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceD, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceD, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice D", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceD, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10" style="width: 100%;">
+                                                    @Html.RadioButtonFor(model => model.Answer, 1, new { Checked = "checked" })
+                                                    <span>Choice A</span>&emsp;&emsp;
+                                                    @Html.RadioButtonFor(model => model.Answer, 2)
+                                                    <span>Choice B</span>&emsp;&emsp;
+                                                    @Html.RadioButtonFor(model => model.Answer, 3)
+                                                    <span>Choice C</span>&emsp;&emsp;
+                                                    @Html.RadioButtonFor(model => model.Answer, 4)
+                                                    <span>Choice D</span>
+                                                    @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Level, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    <div class="checkbox">
+                                                        @Html.DropDownListFor(model => model.Level, level, htmlAttributes: new { @class = "form-control select2", @style = "width: 100%;" })
+                                                        @Html.ValidationMessageFor(model => model.Level, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.Label("MarkOfTheQuestion", "Mark", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.Editor("mark", null, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = "Enter The Mark Of The Question", @min = "1", @required = "required" } })
+                                                </div>
+                                            </div>
+
+                                            @Html.Hidden("TypeID", 1)
+                                            @Html.Hidden("examID", exam.ExamID)
+                                            @Html.Hidden("CourseID", exam.CourseID)
+
+                                            <div class="form-group row">
+                                                <div class="offset-sm-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-success">Save</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="tab-pane" id="listen">
+                                @using (Html.BeginForm("AddQuestions", "Examinations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-horizontal">
+                                        <div class="card-body">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div style="color:red;font-size:20px;font-weight:bold">@ViewBag.Error</div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter The Question", @Value = "Listen to the question and choose the best answer", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                                <div class="col-sm-10">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" accept="audio/*" name="MediaFile" id="MediaFile" required>
+                                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceA, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceA, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice A", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceA, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceB, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceB, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice B", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceB, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceC, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceC, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice C", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceC, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceD, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceD, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice D", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceD, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10" style="width: 100%;">
+                                                    @Html.RadioButtonFor(model => model.Answer, 1, new { Checked = "checked" })
+                                                    <span>Choice A</span>&emsp;&emsp;
+                                                    @Html.RadioButtonFor(model => model.Answer, 2)
+                                                    <span>Choice B</span>&emsp;&emsp;
+                                                    @Html.RadioButtonFor(model => model.Answer, 3)
+                                                    <span>Choice C</span>&emsp;&emsp;
+                                                    @Html.RadioButtonFor(model => model.Answer, 4)
+                                                    <span>Choice D</span>
+                                                    @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Level, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    <div class="checkbox">
+                                                        @Html.DropDownListFor(model => model.Level, level, htmlAttributes: new { @class = "form-control select2", @style = "width: 100%;" })
+                                                        @Html.ValidationMessageFor(model => model.Level, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.Label("MarkOfTheQuestion", "Mark", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.Editor("mark", null, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = "Enter The Mark Of The Question", @min = "1", @required = "required" } })
+                                                </div>
+                                            </div>
+
+                                            @Html.Hidden("TypeID", 2)
+                                            @Html.Hidden("examID", exam.ExamID)
+                                            @Html.Hidden("CourseID", exam.CourseID)
+
+                                            <div class="form-group row">
+                                                <div class="offset-sm-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-success">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="tab-pane" id="image">
+                                @using (Html.BeginForm("AddQuestions", "Examinations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-horizontal">
+                                        <div class="card-body">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div style="color:red;font-size:20px;font-weight:bold">@ViewBag.Error</div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter The Question", @Value = "Look at the image, read the question and choose the best answer", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                                <div class="col-sm-10">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" accept="image/*" name="MediaFile" id="MediaFile" required>
+                                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceA, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceA, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice A", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceA, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceB, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceB, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice B", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceB, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceC, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceC, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice C", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceC, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ChoiceD, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ChoiceD, new { htmlAttributes = new { @class = "form-control", @placeholder = "Choice D", @required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.ChoiceD, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10" style="width: 100%;">
+                                                    @Html.RadioButtonFor(model => model.Answer, 1, new { Checked = "checked" })
+                                                    <span>Choice A</span>&emsp;&emsp;
+                                                    @Html.RadioButtonFor(model => model.Answer, 2)
+                                                    <span>Choice B</span>&emsp;&emsp;
+                                                    @Html.RadioButtonFor(model => model.Answer, 3)
+                                                    <span>Choice C</span>&emsp;&emsp;
+                                                    @Html.RadioButtonFor(model => model.Answer, 4)
+                                                    <span>Choice D</span>
+                                                    @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.Level, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    <div class="checkbox">
+                                                        @Html.DropDownListFor(model => model.Level, level, htmlAttributes: new { @class = "form-control select2", @style = "width: 100%;" })
+                                                        @Html.ValidationMessageFor(model => model.Level, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                @Html.Label("MarkOfTheQuestion", "Mark", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.Editor("mark", null, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = "Enter The Mark Of The Question", @min = "1", @required = "required" } })
+                                                </div>
+                                            </div>
+
+                                            @Html.Hidden("TypeID", 3)
+                                            @Html.Hidden("examID", exam.ExamID)
+                                            @Html.Hidden("CourseID", exam.CourseID)
+
+                                            <div class="form-group row">
+                                                <div class="offset-sm-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-success">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="tab-pane @ViewBag.AvailableActive" id="available">
+                                @if (list.Count != 0)
+                                {
+                                    <table id="tbl_Question" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Question
+                                                </th>
+                                                <th>
+                                                    Choice A
+                                                </th>
+                                                <th>
+                                                    Choice B
+                                                </th>
+                                                <th>
+                                                    Choice C
+                                                </th>
+                                                <th>
+                                                    Choice D
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in list)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @switch (item.TypeID)
+                                                        {
+                                                            case 1:
+                                                                <div>@Html.Raw(item.Content)</div>
+                                                                break;
+                                                            case 2:
+                                                                <div class="text-center">
+                                                                    <audio controls preload="none">
+                                                                        <source src="@Url.Content(item.Content)">
+                                                                    </audio>
+                                                                </div>
+                                                                break;
+                                                            case 3:
+                                                                <div class="text-center"><img src="@Url.Content(item.Content)" width="100" height="100" alt="Question" /></div>
+                                                                break;
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.Answer.Equals("1"))
+                                                        {
+                                                            <b>@item.ChoiceA</b>
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.ChoiceA
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.Answer.Equals("2"))
+                                                        {
+                                                            <b>@item.ChoiceB</b>
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.ChoiceB
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.Answer.Equals("3"))
+                                                        {
+                                                            <b>@item.ChoiceC</b>
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.ChoiceC
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.Answer.Equals("4"))
+                                                        {
+                                                            <b>@item.ChoiceD</b>
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.ChoiceD
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm float-right" data-toggle="modal" data-target="#modal-lg-@item.QuestionID" href="#"><i class="fas fa-eye"></i></a>
+                                                        <a class="btn btn-sm float-right" data-toggle="modal" data-target="#modal-sm-@item.QuestionID" href="#"><i class="fas fa-plus"></i></a>
+
+                                                        <div class="modal fade" id="modal-sm-@item.QuestionID">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">Enter the mark for the question</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    @using (Html.BeginForm("AddAvailableQuestion", "Examinations", FormMethod.Post))
+                                                                    {
+                                                                        <div class="modal-body">
+                                                                            @Html.Hidden("questionId", item.QuestionID)
+                                                                            @Html.Hidden("examId", exam.ExamID)
+                                                                            @Html.TextBox("mark", null, htmlAttributes: new { @class = "form-control", @placeholder = "Enter the mark for the question", @type = "number", @min = "1", @required = "required" })
+                                                                        </div>
+                                                                        <div class="modal-footer justify-content-between">
+                                                                            <button type="submit" class="btn btn-success">Confirm</button>
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-default-info" style="font-size:large">No matching results were found</div>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- (Table) -->
+        </div>
+    </div>
+</section>
+
+@{
+    foreach (var item in list)
+    {
+        <div class="modal fade" id="modal-lg-@item.QuestionID">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Question Detail</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-body box-profile">
+                            <p class="text-muted text-center">@item.Description</p>
+                            @switch (item.TypeID)
+                            {
+                                case 1:
+                                    <h3 class="profile-username text-center">@Html.Raw(item.Content)</h3>
+                                    break;
+                                case 2:
+                                    <div class="text-center">
+                                        <audio controls preload="none">
+                                            <source src="@Url.Content(item.Content)">
+                                        </audio>
+                                    </div>
+                                    break;
+                                case 3:
+                                    <div class="text-center"><img width="50%" src="@Url.Content(item.Content)" alt="Question" /></div>
+                                    break;
+                            }
+
+                            <ul class="list-group list-group-unbordered mb-3">
+
+                                <li class="list-group-item">
+                                    <b>A</b>
+                                    <a class="float-right">
+                                        @if (item.Answer.Equals("1"))
+                                        {
+                                            <b>@item.ChoiceA</b>
+                                        }
+                                        else
+                                        {
+                                            @item.ChoiceA
+                                        }
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>B</b>
+                                    <a class="float-right">
+                                        @if (item.Answer.Equals("2"))
+                                        {
+                                            <b>@item.ChoiceB</b>
+                                        }
+                                        else
+                                        {
+                                            @item.ChoiceB
+                                        }
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>C</b>
+                                    <a class="float-right">
+                                        @if (item.Answer.Equals("3"))
+                                        {
+                                            <b>@item.ChoiceC</b>
+                                        }
+                                        else
+                                        {
+                                            @item.ChoiceC
+                                        }
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>D</b>
+                                    <a class="float-right">
+                                        @if (item.Answer.Equals("4"))
+                                        {
+                                            <b>@item.ChoiceD</b>
+                                        }
+                                        else
+                                        {
+                                            @item.ChoiceD
+                                        }
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Course</b> <a class="float-right">@item.Cours.CourseName</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Type</b> <a class="float-right">@item.QuestionType.TypeName</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Level</b>
+                                    @switch (item.Level)
+                                    {
+                                        case -1:
+                                            <span class="badge badge-success float-right">easy</span>
+                                            break;
+                                        case 0:
+                                            <span class="badge badge-info float-right">nomral</span>
+                                            break;
+                                        case 1:
+                                            <span class="badge badge-warning float-right">difficult</span>
+                                            break;
+                                        case 2:
+                                            <span class="badge badge-danger float-right">extremely difficult</span>
+                                            break;
+                                    }
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <div></div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+    foreach (var item in contents)
+    {
+        <div class="modal fade" id="modal-content-@item.QuestionID-@item.ExamID">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Question Detail</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-body box-profile">
+                            <p class="text-muted text-center">@item.Question.Description</p>
+                            @switch (item.Question.TypeID)
+                            {
+                                case 1:
+                                    <h3 class="profile-username text-center">@Html.Raw(item.Question.Content)</h3>
+                                    break;
+                                case 2:
+                                    <div class="text-center">
+                                        <audio controls preload="none">
+                                            <source src="@Url.Content(item.Question.Content)">
+                                        </audio>
+                                    </div>
+                                    break;
+                                case 3:
+                                    <div class="text-center"><img width="50%" src="@Url.Content(item.Question.Content)" alt="Question" /></div>
+                                    break;
+                            }
+
+                            <ul class="list-group list-group-unbordered mb-3">
+
+                                <li class="list-group-item">
+                                    <b>A</b>
+                                    <a class="float-right">
+                                        @if (item.Question.Answer.Equals("1"))
+                                        {
+                                            <b>@item.Question.ChoiceA</b>
+                                        }
+                                        else
+                                        {
+                                            @item.Question.ChoiceA
+                                        }
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>B</b>
+                                    <a class="float-right">
+                                        @if (item.Question.Answer.Equals("2"))
+                                        {
+                                            <b>@item.Question.ChoiceB</b>
+                                        }
+                                        else
+                                        {
+                                            @item.Question.ChoiceB
+                                        }
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>C</b>
+                                    <a class="float-right">
+                                        @if (item.Question.Answer.Equals("3"))
+                                        {
+                                            <b>@item.Question.ChoiceC</b>
+                                        }
+                                        else
+                                        {
+                                            @item.Question.ChoiceC
+                                        }
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>D</b>
+                                    <a class="float-right">
+                                        @if (item.Question.Answer.Equals("4"))
+                                        {
+                                            <b>@item.Question.ChoiceD</b>
+                                        }
+                                        else
+                                        {
+                                            @item.Question.ChoiceD
+                                        }
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Course</b> <a class="float-right">@item.Question.Cours.CourseName</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Type</b> <a class="float-right">@item.Question.QuestionType.TypeName</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Level</b>
+                                    @switch (item.Question.Level)
+                                    {
+                                        case -1:
+                                            <span class="badge badge-success float-right">easy</span>
+                                            break;
+                                        case 0:
+                                            <span class="badge badge-info float-right">nomral</span>
+                                            break;
+                                        case 1:
+                                            <span class="badge badge-warning float-right">difficult</span>
+                                            break;
+                                        case 2:
+                                            <span class="badge badge-danger float-right">extremely difficult</span>
+                                            break;
+                                    }
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Mark</b> <a class="float-right">@item.Mark</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <div></div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
+
+@section ScriptConfig
+{
+    @Styles.Render("~/asset/css/datatable")
+    @Scripts.Render("~/asset/scripts/datatable")
+    @Styles.Render("~/asset/css/form")
+    @Scripts.Render("~/asset/scripts/form")
+    @Styles.Render("~/asset/css/select2")
+    @Scripts.Render("~/asset/scripts/select2")
+
+    <script>
+        $(function () {
+            $('#summernote_Description').summernote()
+            $('.select2').select2()
+        })
+
+        $('body').on('hidden.bs.modal', '.modal', function () {
+            $('audio').trigger('pause');
+        });
+
+    </script>
+
+
+    @if (TempData[TN_academic.Common.CommonConstants.INVALID_QUESTION_CONTENT] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Content of the question must be not empty!',
+            })
+        </script>
+    }
+
+    @if (TempData[TN_academic.Common.CommonConstants.INVALID_QUESTION_DESCRIPTION] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Description of the question must be not empty!',
+            })
+        </script>
+    }
+
+
+    @if (TempData[TN_academic.Common.CommonConstants.INVALID_QUESTION_CHOICEA] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'The choice A of the question must be not empty!',
+            })
+        </script>
+    }
+
+    @if (TempData[TN_academic.Common.CommonConstants.INVALID_QUESTION_CHOICEB] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'The choice B of the question must be not empty!',
+            })
+        </script>
+    }
+
+    @if (TempData[TN_academic.Common.CommonConstants.INVALID_QUESTION_CHOICEC] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'The choice C of the question must be not empty!',
+            })
+        </script>
+    }
+
+    @if (TempData[TN_academic.Common.CommonConstants.INVALID_QUESTION_CHOICED] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'The choice D of the question must be not empty!',
+            })
+        </script>
+    }
+
+
+
+}

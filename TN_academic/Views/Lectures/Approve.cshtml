@@ -1,0 +1,136 @@
+﻿@model IEnumerable<TN_academic.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "Approve Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner2.jpg";
+    ViewBag.BannerText = "Approve Student";
+    string isChecked = "";
+}
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data of your students</h3>
+            </div>
+            <div class="card-body">
+                <table id="tbl_Students" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Order.User.Username)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Order.User.FirstName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Order.User.LastName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Order.User.DOB)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Order.User.Gender)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Order.User.Phone)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Order.User.Email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Order.User.Avatar)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Order.User.UserStatu.StatusName)
+                            </th>
+                            <th>
+                                Approve
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Order.User.Username)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Order.User.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Order.User.LastName)
+                                </td>
+                                <td>
+                                    @item.Order.User.DOB.Value.ToShortDateString()
+                                </td>
+                                <td>
+                                    @if (item.Order.User.Gender == true)
+                                    {
+                                        <div>Male</div>
+                                    }
+                                    else
+                                    {
+                                        <div>Female</div>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="tel: @item.Order.User.Phone">@Html.DisplayFor(modelItem => item.Order.User.Phone)</a>
+                                </td>
+                                <td>
+                                    <a href="mailto: @item.Order.User.Email">@Html.DisplayFor(modelItem => item.Order.User.Email)</a>
+                                </td>
+                                <td>
+                                    <img src="@Url.Content(item.Order.User.Avatar)" width="100" height="100" />
+                                </td>
+                                <td>
+                                    @{
+                                        if (item.Order.User.StatusID == 1)
+                                        {
+                                            <span class="badge badge-success">active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">block</span>
+                                        }
+                                    }
+                                </td>
+
+                                <td>
+                                    @if (item.Order.PaymentStatus == 1)
+                                    {
+                                        isChecked = "checked='checked'";
+                                    }
+                                    else
+                                    {
+                                        isChecked = "";
+                                    }
+                                    <div class="checkbox checbox-switch switch-primary">
+                                        <label>
+                                            <input type="checkbox" data-id="@item.OrderID" id="chkStatus" name="chkStatus" @isChecked />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section ClientScript
+{
+    <link href="~/Content/switch.css" rel="stylesheet" />
+    @Styles.Render("~/asset/css/datatable")
+    @Scripts.Render("~/asset/scripts/datatable")
+    <script src="~/Content/jsControllers/jsApproveStudent.js"></script>
+}

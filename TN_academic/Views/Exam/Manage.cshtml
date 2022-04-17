@@ -1,0 +1,138 @@
+﻿@model List<TN_academic.Models.Examination>
+@{
+    ViewBag.Title = "Manage Examination";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner2.jpg";
+    ViewBag.BannerText = "Manage Examination";
+    string isChecked = "";
+}
+
+<div class="content-block">
+    <div class="section-area section-sp1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 m-b30">
+                    <div class="profile-content-bx">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="edit-profile">
+                                <div class="">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Data of Examinations</h3>
+                                        <p>
+                                            <a class="btn btn-success btn-sm float-right" href="~/Exam/Create">
+                                                <i class="fas fa-plus">
+                                                </i>
+                                                Create New
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="tbl_Examination" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Examination Name
+                                                    </th>
+                                                    <th>
+                                                        Questions
+                                                    </th>
+                                                    <th>
+                                                        Course Name
+                                                    </th>
+                                                    <th>
+                                                        Time
+                                                    </th>
+                                                    <th>
+                                                        Date
+                                                    </th>
+                                                    <th>
+                                                        Status
+                                                    </th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ExamName)
+                                                        </td>
+                                                        <td>
+                                                            @item.ExaminationContents.Count
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Cours.CourseName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Time) minutes
+                                                        </td>
+                                                        <td>
+                                                            @item.ExaminationDate.Value.ToString("dd/MM/yyyy HH:mm")
+                                                        </td>
+                                                        <td>
+                                                            @if (item.Status == 1)
+                                                            {
+                                                                isChecked = "checked='checked'";
+                                                            }
+                                                            else
+                                                            {
+                                                                isChecked = "";
+                                                            }
+                                                            <div class="checkbox checbox-switch switch-primary">
+                                                                <label>
+                                                                    <input type="checkbox" data-id="@item.ExamID" id="chkStatus" name="chkStatus" @isChecked />
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td>
+                                                            <a class="btn btn-primary btn-sm btn-block" href="@Url.Action("Details", "Exam", new { id = item.ExamID })">
+                                                                <i class="fas fa-eye">
+                                                                </i>
+                                                                View
+                                                            </a>
+                                                            <a class="btn btn-info btn-sm btn-block" href="@Url.Action("Edit", "Exam", new { id = item.ExamID })">
+                                                                <i class="fas fa-pencil-alt">
+                                                                </i>
+                                                                Edit
+                                                            </a>
+                                                        </td>
+                                                        <td class="project-actions text-right">
+                                                            <a class="btn btn-success btn-sm btn-block" href="@Url.Action("AddQuestions", "Exam", new { examId = item.ExamID })">
+                                                                <i class="fas fa-question">
+                                                                </i>
+                                                                Question
+                                                            </a>
+                                                            <a class="btn btn-danger btn-sm btn-block" href="@Url.Action("Delete", "Exam", new { id = item.ExamID })">
+                                                                <i class="fas fa-trash">
+                                                                </i>
+                                                                Delete
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+@section ClientScript
+{
+    <link href="~/Content/switch.css" rel="stylesheet" />
+    @Styles.Render("~/asset/css/datatable")
+    @Scripts.Render("~/asset/scripts/datatable")
+    <script src="~/Content/jsControllers/jsChangeStatusExamination.js"></script>
+}

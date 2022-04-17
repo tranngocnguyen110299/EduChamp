@@ -1,0 +1,117 @@
+﻿@model TN_academic.Models.Examination
+@{
+    ViewBag.Title = "Delete Examination";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner2.jpg";
+    ViewBag.BannerText = "Delete Examination";
+
+}
+
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h1 style="font-weight:bold; font-size:25px" class="card-title">Are you sure you want to delete this?</h1>
+                    </div>
+
+                    <div class="col-sm-2">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                <div class="card-tools">
+                                    <input type="submit" value="Delete" class="btn btn-block btn-secondary float-right btn-danger" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="card-tools col-sm-2">
+                        <a class="btn btn-block btn-secondary float-right" href="@Url.Action("Manage", "Exam")">Cancel</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12 order-12 order-md-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.ExamID)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.ExamID)
+                                    </p>
+                                </div>
+
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.ExamName)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.ExamName)
+                                    </p>
+                                </div>
+
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Cours.CourseName)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Cours.CourseName)
+                                    </p>
+                                </div>
+
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Time)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Time) minutes
+                                    </p>
+                                </div>
+
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.ExaminationDate)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.ExaminationDate)
+                                    </p>
+                                </div>
+
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Status)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @if (Model.ExaminationContents.Count == 0)
+                                        {
+                                            <span class="badge badge-danger">empty</span>
+                                        }
+                                        @if (Model.Status == -1)
+                                        {
+                                            <span class="badge badge-warning">upcoming</span>
+                                        }
+                                        else if (Model.Status == 0)
+                                        {
+                                            <span class="badge badge-primary">open</span>
+                                        }
+                                        else if (Model.Status == 1)
+                                        {
+                                            <span class="badge badge-success">close</span>
+                                        }
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>

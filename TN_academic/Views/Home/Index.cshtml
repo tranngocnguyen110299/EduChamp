@@ -1,0 +1,898 @@
+﻿@model IEnumerable <TN_academic.Models.OrderDetail>
+@{ 
+    Layout = null;
+    var cart = (List<TN_academic.ViewModels.Cart>)Session["CART_SESSION"];
+    var blog = (List<TN_academic.Models.Blog>)ViewBag.Blogs;
+    var newCourse = (List<TN_academic.Models.Cours>)ViewBag.NewCourses;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- META ============================================= -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="" />
+
+    <!-- DESCRIPTION -->
+    <meta name="description" content="EduChamp : Home page" />
+
+    <!-- OG -->
+    <meta property="og:title" content="EduChamp : Education Support Website" />
+    <meta property="og:description" content="EduChamp : Education Support Website" />
+    <meta property="og:image" content="" />
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON ============================================= -->
+    <link rel="icon" href="~/Content/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/assets/images/favicon.png" />
+
+    <!-- PAGE TITLE HERE ============================================= -->
+    <title>EduChamp - Homepage </title>
+
+    <!-- MOBILE SPECIFIC ============================================= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- All PLUGINS CSS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/assets.css">
+
+    <!-- TYPOGRAPHY ============================================= -->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/typography.css">
+
+    <!-- SHORTCODES ============================================= -->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/shortcodes/shortcodes.css">
+
+    <!-- STYLESHEETS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/style.css">
+    <link class="skin" rel="stylesheet" type="text/css" href="~/Content/assets/css/color/color-1.css">
+
+    <!-- REVOLUTION SLIDER CSS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/vendors/revolution/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/vendors/revolution/css/settings.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/vendors/revolution/css/navigation.css">
+    <link rel="stylesheet" href="~/Asset/plugins/toastr/toastr.min.css">
+    <!-- REVOLUTION SLIDER END -->
+</head>
+<body id="bg">
+    <div class="page-wraper">
+        <div id="loading-icon-bx"></div>
+
+        <header class="header rs-nav header-transparent">
+            @{ Html.RenderAction("_Header", "Home"); }
+        </header>
+
+        <div class="page-content bg-white">
+
+            <div class="rev-slider">
+                <div id="rev_slider_486_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="news-gallery36" data-source="gallery" style="margin:0px auto;background-color:#ffffff;padding:0px;margin-top:0px;margin-bottom:0px;">
+
+                    <div id="rev_slider_486_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.3.0.2">
+                        <ul>
+                            <!-- SLIDE  -->
+                            <li data-index="rs-100"
+                                data-transition="parallaxvertical"
+                                data-slotamount="default"
+                                data-hideafterloop="0"
+                                data-hideslideonmobile="off"
+                                data-easein="default"
+                                data-easeout="default"
+                                data-masterspeed="default"
+                                data-thumb="error-404.html"
+                                data-rotate="0"
+                                data-fstransition="fade"
+                                data-fsmasterspeed="1500"
+                                data-fsslotamount="7"
+                                data-saveperformance="off"
+                                data-title="A STUDY ON HAPPINESS"
+                                data-param1="" data-param2=""
+                                data-param3="" data-param4=""
+                                data-param5="" data-param6=""
+                                data-param7="" data-param8=""
+                                data-param9="" data-param10=""
+                                data-description="Science says that Women are generally happier">
+
+                                <img src="~/Content/assets/images/slider/slide1.jpg" alt=""
+                                     data-bgposition="center center"
+                                     data-bgfit="cover"
+                                     data-bgrepeat="no-repeat"
+                                     data-bgparallax="10"
+                                     class="rev-slidebg"
+                                     data-no-retina />
+
+                                <div class="tp-caption tp-shape tp-shapewrapper "
+                                     id="slide-100-layer-1"
+                                     data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                     data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']"
+                                     data-width="full"
+                                     data-height="full"
+                                     data-whitespace="nowrap"
+                                     data-type="shape"
+                                     data-basealign="slide"
+                                     data-responsive_offset="off"
+                                     data-responsive="off"
+                                     data-frames='[{"from":"opacity:0;","speed":1,"to":"o:1;","delay":0,"ease":"Power4.easeOut"},{"delay":"wait","speed":1,"to":"opacity:0;","ease":"Power4.easeOut"}]'
+                                     data-textAlign="['left','left','left','left']"
+                                     data-paddingtop="[0,0,0,0]"
+                                     data-paddingright="[0,0,0,0]"
+                                     data-paddingbottom="[0,0,0,0]"
+                                     data-paddingleft="[0,0,0,0]"
+                                     style="z-index: 5;background-color:rgba(2, 0, 11, 0.80);border-color:rgba(0, 0, 0, 0);border-width:0px;"> </div>
+
+                                <div class="tp-caption Newspaper-Title   tp-resizeme"
+                                     id="slide-100-layer-2"
+                                     data-x="['center','center','center','center']"
+                                     data-hoffset="['0','0','0','0']"
+                                     data-y="['top','top','top','top']"
+                                     data-voffset="['250','250','250','240']"
+                                     data-fontsize="['50','50','50','30']"
+                                     data-lineheight="['55','55','55','35']"
+                                     data-width="full"
+                                     data-height="none"
+                                     data-whitespace="normal"
+                                     data-type="text"
+                                     data-responsive_offset="on"
+                                     data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                     data-textAlign="['center','center','center','center']"
+                                     data-paddingtop="[0,0,0,0]"
+                                     data-paddingright="[0,0,0,0]"
+                                     data-paddingbottom="[10,10,10,10]"
+                                     data-paddingleft="[0,0,0,0]"
+                                     style="z-index: 6; font-family:rubik; font-weight:700; text-align:center; white-space: normal;">
+                                    Welcome To EduChamp
+                                </div>
+
+
+                                <div class="tp-caption Newspaper-Subtitle   tp-resizeme"
+                                     id="slide-100-layer-3"
+                                     data-x="['center','center','center','center']"
+                                     data-hoffset="['0','0','0','0']"
+                                     data-y="['top','top','top','top']"
+                                     data-voffset="['210','210','210','210']"
+                                     data-width="none"
+                                     data-height="none"
+                                     data-whitespace="nowrap"
+                                     data-type="text"
+                                     data-responsive_offset="on"
+                                     data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                     data-textAlign="['left','left','left','left']"
+                                     data-paddingtop="[0,0,0,0]"
+                                     data-paddingright="[0,0,0,0]"
+                                     data-paddingbottom="[0,0,0,0]"
+                                     data-paddingleft="[0,0,0,0]"
+                                     style="z-index: 7; white-space: nowrap; color:#fff; font-family:rubik; font-size:18px; font-weight:400;">
+                                    Batter Education For A Better
+                                </div>
+
+                                <!-- LAYER NR. 3 -->
+                                <div class="tp-caption Newspaper-Subtitle   tp-resizeme"
+                                     id="slide-100-layer-4"
+                                     data-x="['center','center','center','center']"
+                                     data-hoffset="['0','0','0','0']"
+                                     data-y="['top','top','top','top']"
+                                     data-voffset="['320','320','320','290']"
+                                     data-width="['800','800','700','420']"
+                                     data-height="['100','100','100','120']"
+                                     data-whitespace="unset"
+                                     data-type="text"
+                                     data-responsive_offset="on"
+                                     data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                     data-textAlign="['center','center','center','center']"
+                                     data-paddingtop="[0,0,0,0]"
+                                     data-paddingright="[0,0,0,0]"
+                                     data-paddingbottom="[0,0,0,0]"
+                                     data-paddingleft="[0,0,0,0]"
+                                     style="z-index: 7; text-transform:capitalize; white-space: unset; color:#fff; font-family:rubik; font-size:18px; line-height:28px; font-weight:400;">
+                                    A community of lifelong learners, responsible global citizens, and champions of our own success.
+                                </div>
+                                <!-- LAYER NR. 4 -->
+                                <a href="~/About/">
+                                    <div class="tp-caption Newspaper-Button rev-btn "
+                                         id="slide-100-layer-5"
+                                         data-x="['center','center','center','center']"
+                                         data-hoffset="['90','80','75','90']"
+                                         data-y="['top','top','top','top']"
+                                         data-voffset="['400','400','400','420']"
+                                         data-width="none"
+                                         data-height="none"
+                                         data-whitespace="nowrap"
+                                         data-type="button"
+                                         data-responsive_offset="on"
+                                         data-responsive="off"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[12,12,12,12]"
+                                         data-paddingright="[30,35,35,15]"
+                                         data-paddingbottom="[12,12,12,12]"
+                                         data-paddingleft="[30,35,35,15]"
+                                         style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; background-color:var(--primary) !important; border:0; border-radius:30px; margin-right:5px;">READ MORE </div>
+                                </a>
+                                <a href="~/Contacts/">
+                                    <div class="tp-caption Newspaper-Button rev-btn"
+                                         id="slide-100-layer-6"
+                                         data-x="['center','center','center','center']"
+                                         data-hoffset="['-90','-80','-75','-90']"
+                                         data-y="['top','top','top','top']"
+                                         data-voffset="['400','400','400','420']"
+                                         data-width="none"
+                                         data-height="none"
+                                         data-whitespace="nowrap"
+                                         data-type="button"
+                                         data-responsive_offset="on"
+                                         data-responsive="off"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[12,12,12,12]"
+                                         data-paddingright="[30,35,35,15]"
+                                         data-paddingbottom="[12,12,12,12]"
+                                         data-paddingleft="[30,35,35,15]"
+                                         style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; border-radius:30px;">
+                                        CONTACT US
+                                    </div>
+                                </a>
+                            </li>
+                            <li data-index="rs-200"
+                                data-transition="parallaxvertical"
+                                data-slotamount="default"
+                                data-hideafterloop="0"
+                                data-hideslideonmobile="off"
+                                data-easein="default"
+                                data-easeout="default"
+                                data-masterspeed="default"
+                                data-thumb="~/Content/assets/images/slider/slide1.jpg"
+                                data-rotate="0"
+                                data-fstransition="fade"
+                                data-fsmasterspeed="1500"
+                                data-fsslotamount="7"
+                                data-saveperformance="off"
+                                data-title="A STUDY ON HAPPINESS"
+                                data-param1="" data-param2=""
+                                data-param3="" data-param4=""
+                                data-param5="" data-param6=""
+                                data-param7="" data-param8=""
+                                data-param9="" data-param10=""
+                                data-description="Science says that Women are generally happier">
+
+                                <img src="~/Content/assets/images/slider/slide2.jpg" alt=""
+                                     data-bgposition="center center"
+                                     data-bgfit="cover"
+                                     data-bgrepeat="no-repeat"
+                                     data-bgparallax="10"
+                                     class="rev-slidebg"
+                                     data-no-retina />
+
+
+                                <div class="tp-caption tp-shape tp-shapewrapper "
+                                     id="slide-200-layer-1"
+                                     data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                     data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']"
+                                     data-width="full"
+                                     data-height="full"
+                                     data-whitespace="nowrap"
+                                     data-type="shape"
+                                     data-basealign="slide"
+                                     data-responsive_offset="off"
+                                     data-responsive="off"
+                                     data-frames='[{"from":"opacity:0;","speed":1,"to":"o:1;","delay":0,"ease":"Power4.easeOut"},{"delay":"wait","speed":1000,"to":"opacity:1;","ease":"Power4.easeOut"}]'
+                                     data-textAlign="['left','left','left','left']"
+                                     data-paddingtop="[0,0,0,0]"
+                                     data-paddingright="[0,0,0,0]"
+                                     data-paddingbottom="[0,0,0,0]"
+                                     data-paddingleft="[0,0,0,0]"
+                                     style="z-index: 5;background-color:rgba(2, 0, 11, 0.80);border-color:rgba(0, 0, 0, 0);border-width:0px;">
+                                </div>
+
+
+                                <div class="tp-caption Newspaper-Title   tp-resizeme"
+                                     id="slide-200-layer-2"
+                                     data-x="['center','center','center','center']"
+                                     data-hoffset="['0','0','0','0']"
+                                     data-y="['top','top','top','top']"
+                                     data-voffset="['250','250','250','240']"
+                                     data-fontsize="['50','50','50','30']"
+                                     data-lineheight="['55','55','55','35']"
+                                     data-width="full"
+                                     data-height="none"
+                                     data-whitespace="normal"
+                                     data-type="text"
+                                     data-responsive_offset="on"
+                                     data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                     data-textAlign="['center','center','center','center']"
+                                     data-paddingtop="[0,0,0,0]"
+                                     data-paddingright="[0,0,0,0]"
+                                     data-paddingbottom="[10,10,10,10]"
+                                     data-paddingleft="[0,0,0,0]"
+                                     style="z-index: 6; font-family:rubik; font-weight:700; text-align:center; white-space: normal;text-transform:uppercase;">
+                                    Welcome To EduChamp
+                                </div>
+
+
+                                <div class="tp-caption Newspaper-Subtitle   tp-resizeme"
+                                     id="slide-200-layer-3"
+                                     data-x="['center','center','center','center']"
+                                     data-hoffset="['0','0','0','0']"
+                                     data-y="['top','top','top','top']"
+                                     data-voffset="['210','210','210','210']"
+                                     data-width="none"
+                                     data-height="none"
+                                     data-whitespace="nowrap"
+                                     data-type="text"
+                                     data-responsive_offset="on"
+                                     data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                     data-textAlign="['left','left','left','left']"
+                                     data-paddingtop="[0,0,0,0]"
+                                     data-paddingright="[0,0,0,0]"
+                                     data-paddingbottom="[0,0,0,0]"
+                                     data-paddingleft="[0,0,0,0]"
+                                     style="z-index: 7; white-space: nowrap;text-transform:uppercase; color:#fff; font-family:rubik; font-size:18px; font-weight:400;">
+                                    Batter Education For A Better
+                                </div>
+
+                                <!-- LAYER NR. 3 -->
+                                <div class="tp-caption Newspaper-Subtitle   tp-resizeme"
+                                     id="slide-200-layer-4"
+                                     data-x="['center','center','center','center']"
+                                     data-hoffset="['0','0','0','0']"
+                                     data-y="['top','top','top','top']"
+                                     data-voffset="['320','320','320','290']"
+                                     data-width="['800','800','700','420']"
+                                     data-height="['100','100','100','120']"
+                                     data-whitespace="unset"
+                                     data-type="text"
+                                     data-responsive_offset="on"
+                                     data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                     data-textAlign="['center','center','center','center']"
+                                     data-paddingtop="[0,0,0,0]"
+                                     data-paddingright="[0,0,0,0]"
+                                     data-paddingbottom="[0,0,0,0]"
+                                     data-paddingleft="[0,0,0,0]"
+                                     style="z-index: 7; text-transform:capitalize; white-space: unset; color:#fff; font-family:rubik; font-size:18px; line-height:28px; font-weight:400;">
+                                    Education is about perparing students for college and beyond.
+                                </div>
+                                <!-- LAYER NR. 4 -->
+                                <a href="~/About/">
+                                    <div class="tp-caption Newspaper-Button rev-btn "
+                                         id="slide-200-layer-5"
+                                         data-x="['center','center','center','center']"
+                                         data-hoffset="['90','80','75','90']"
+                                         data-y="['top','top','top','top']"
+                                         data-voffset="['400','400','400','420']"
+                                         data-width="none"
+                                         data-height="none"
+                                         data-whitespace="nowrap"
+                                         data-type="button"
+                                         data-responsive_offset="on"
+                                         data-responsive="off"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[12,12,12,12]"
+                                         data-paddingright="[30,35,35,15]"
+                                         data-paddingbottom="[12,12,12,12]"
+                                         data-paddingleft="[30,35,35,15]"
+                                         style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; background-color:var(--primary) !important; border:0; border-radius:30px; margin-right:5px;">READ MORE </div>
+                                </a>
+                                <a href="~/Contacts/">
+                                    <div class="tp-caption Newspaper-Button rev-btn"
+                                         id="slide-200-layer-6"
+                                         data-x="['center','center','center','center']"
+                                         data-hoffset="['-90','-80','-75','-90']"
+                                         data-y="['top','top','top','top']"
+                                         data-voffset="['400','400','400','420']"
+                                         data-width="none"
+                                         data-height="none"
+                                         data-whitespace="nowrap"
+                                         data-type="button"
+                                         data-responsive_offset="on"
+                                         data-responsive="off"
+                                         data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(0, 0, 0, 1.00);bg:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);bw:1px 1px 1px 1px;"}]'
+                                         data-textAlign="['center','center','center','center']"
+                                         data-paddingtop="[12,12,12,12]"
+                                         data-paddingright="[30,35,35,15]"
+                                         data-paddingbottom="[12,12,12,12]"
+                                         data-paddingleft="[30,35,35,15]"
+                                         style="z-index: 8; white-space: nowrap; outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer; border-radius:30px;">CONTACT US</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+
+
+                <div class="section-area content-inner service-info-bx">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="service-bx">
+                                    <div class="action-box">
+                                        <img src="~/Content/assets/images/our-services/pic1.jpg" alt="">
+                                    </div>
+                                    <div class="info-bx text-center">
+                                        <div class="feature-box-sm radius bg-white">
+                                            <i class="fa fa-bank text-primary"></i>
+                                        </div>
+                                        <h4><a href="~/Courses">Learn Courses Online</a></h4>
+                                        <a href="~/Courses" class="btn radius-xl">View More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="service-bx">
+                                    <div class="action-box">
+                                        <img src="~/Content/assets/images/our-services/pic2.jpg" alt="">
+                                    </div>
+                                    <div class="info-bx text-center">
+                                        <div class="feature-box-sm radius bg-white">
+                                            <i class="fa fa-book text-primary"></i>
+                                        </div>
+                                        <h4><a href="~/Blogs">Let's discuss together!</a></h4>
+                                        <a href="~/Blogs" class="btn radius-xl">View More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="service-bx m-b0">
+                                    <div class="action-box">
+                                        <img src="~/Content/assets/images/our-services/pic3.jpg" alt="">
+                                    </div>
+                                    <div class="info-bx text-center">
+                                        <div class="feature-box-sm radius bg-white">
+                                            <i class="fa fa-file-text-o text-primary"></i>
+                                        </div>
+                                        <h4><a href="~/Register/RegisterInstructor">To become Instructor</a></h4>
+                                        <a href="~/Register/RegisterInstructor" class="btn radius-xl">View More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-area section-sp2 popular-courses-bx">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 heading-bx left">
+                                <h2 class="title-head">Popular <span>Courses</span></h2>
+                                <p>It will help us gain information that is widely attended by students.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="courses-carousel owl-carousel owl-btn-1 col-12 p-lr0">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="item">
+                                        <div class="cours-bx">
+                                            <div class="action-box">
+                                                <img src="@Url.Content(item.Cours.Thumbnail)" style="width:290px; height:174px" alt="">
+                                                @if (cart != null)
+                                                {
+                                                    if (cart.Exists(m => m.Course.CourseID == item.CourseID))
+                                                    {
+                                                        <a href="~/Cart" class="btn">Go to cart</a>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="~/Cart/addItem?id=@item.CourseID" class="btn">Add to cart</a>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <a href="~/Cart/addItem?id=@item.CourseID" class="btn">Add to cart</a>
+                                                }
+                                            </div>
+                                            <div class="info-bx text-center">
+                                                <h5><a href="@Url.Action("Details", "Courses", new {id = item.CourseID })">@item.Cours.CourseName</a></h5>
+                                                <span>@item.Cours.Category.CategoryName</span>
+                                            </div>
+                                            <div class="cours-more-info">
+                                                <div class="review">
+                                                    <span>@item.Cours.CourseComments.Count Reviews</span>
+                                                    <ul class="cours-star">
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price">
+                                                    <del>@string.Format("{0:N0}", (decimal)item.Cours.OldPrice) ₫</del>
+                                                    <h5>@string.Format("{0:N0}", (decimal)item.Cours.Price)₫</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-area section-sp1 ovpr-dark bg-fix online-cours" style="background-image:url(~/Content/assets/images/background/bg1.jpg);">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 text-center text-white">
+                                <h2>Online Courses To Learn</h2>
+                                <h5>Own Your Feature Learning New Skills Online</h5>
+                                <form role="search" class="cours-search" method="post" action="/Courses/Search">
+                                    <div class="input-group">
+                                        <input type="text" name="txtSearch" class="form-control" placeholder="What do you want to learn today?	">
+                                        <div class="input-group-append">
+                                            <input class="btn" type="submit" value="Search" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="mw800 m-auto">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="cours-search-bx m-b30">
+                                        <div class="icon-box">
+                                            <h3><i class="ti-user"></i><span class="counter">@ViewBag.CountStudent</span></h3>
+                                        </div>
+                                        <span class="cours-search-text">Over @ViewBag.CountStudent Student.</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="cours-search-bx m-b30">
+                                        <div class="icon-box">
+                                            <h3><i class="ti-book"></i><span class="counter">@ViewBag.CountCourse</span></h3>
+                                        </div>
+                                        <span class="cours-search-text">@ViewBag.CountCourse Courses.</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="cours-search-bx m-b30">
+                                        <div class="icon-box">
+                                            <h3><i class="ti-layout-list-post"></i><span class="counter">@ViewBag.CountBlog</span></h3>
+                                        </div>
+                                        <span class="cours-search-text">@ViewBag.CountBlog Blogs.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form END -->
+                <div class="section-area section-sp2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 text-center heading-bx">
+                                <h2 class="title-head m-b0">Latest <span> Courses</span></h2>
+                                <p class="m-b0">It will help us get the latest information, keep up with trends.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="courses-carousel owl-carousel owl-btn-1 col-12 p-lr0">
+                                @foreach (var item in newCourse)
+                                {
+                                    <div class="item">
+                                        <div class="cours-bx">
+                                            <div class="action-box">
+                                                <img src="@Url.Content(item.Thumbnail)" style="width:290px; height:174px" alt="">
+                                                @if (cart != null)
+                                                {
+                                                    if (cart.Exists(m => m.Course.CourseID == item.CourseID))
+                                                    {
+                                                        <a href="~/Cart" class="btn">Go to cart</a>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="~/Cart/addItem?id=@item.CourseID" class="btn">Add to cart</a>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <a href="~/Cart/addItem?id=@item.CourseID" class="btn">Add to cart</a>
+                                                }
+                                            </div>
+                                            <div class="info-bx text-center">
+                                                <h5><a href="@Url.Action("Details", "Courses", new {id = item.CourseID })">@item.CourseName</a></h5>
+                                                <span>@item.Category.CategoryName</span>
+                                            </div>
+                                            <div class="cours-more-info">
+                                                <div class="review">
+                                                    <span>@item.CourseComments.Count Reviews</span>
+                                                    <ul class="cours-star">
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                        <li class="active"><i class="fa fa-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price">
+                                                    <del>@string.Format("{0:N0}", (decimal)item.OldPrice) ₫</del>
+                                                    <h5>@string.Format("{0:N0}", (decimal)item.Price)₫</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <a href="~/Courses" class="btn">View All Courses</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials -->
+                <div class="section-area section-sp2 bg-fix ovbl-dark" style="background-image:url(~/Content/assets/images/background/bg1.jpg);">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 text-white heading-bx left">
+                                <h2 class="title-head text-uppercase">covid-19 <span>statistics</span></h2>
+                                <p>Prime Minister Nguyen Xuan Phuc stated: “Fighting against the pandemic like fighting against an enemy".</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-carousel owl-carousel owl-btn-1 col-12 p-lr0">
+                            <div class="item">
+                                <div class="testimonial-bx">
+                                    <div class="testimonial-thumb">
+                                        <img src="~/public/img/viet-nam-flag.png" />
+                                    </div>
+                                    <div class="testimonial-info">
+                                        <h5 class="name">Viet Nam</h5>
+                                        <p class="vnDate"></p>
+                                    </div>
+                                    <div class="testimonial-content">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <p>Total Confirmed:&nbsp; <big class="totalConfirmed text-danger" style="font-weight: bold"></big></p>
+                                                    <p>New Confirmed:&nbsp; <big class="newConfirmed text-warning" style="font-weight: bold"></big></p>
+                                                </td>
+                                                <td>
+                                                    <p>Total Deaths:&nbsp; <big class="totalDeaths text-info" style="font-weight: bold"></big></p>
+                                                    <p>Total Recovered:&nbsp; <big class="totalRecovered text-success" style="font-weight: bold"></big></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="testimonial-bx">
+                                    <div class="testimonial-thumb">
+                                        <img src="~/public/img/global-logo.jpg" />
+                                    </div>
+                                    <div class="testimonial-info">
+                                        <h5 class="name">Global</h5>
+                                        <p class="globalDate"></p>
+                                    </div>
+                                    <div class="testimonial-content">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <p>Total Confirmed:<br /> <big class="globtotalConfirmed text-danger" style="font-weight: bold"></big></p>
+                                                    <p>New Confirmed:<br /> <big class="globnewConfirmed text-warning" style="font-weight: bold"></big></p>
+                                                </td>
+                                                <td>
+                                                    <p>Total Deaths:<br /> <big class="globtotalDeaths text-info" style="font-weight: bold"></big></p>
+                                                    <p>Total Recovered:<br /> <big class="globtotalRecovered text-success" style="font-weight: bold"></big></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-area section-sp2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 heading-bx left">
+                                <h2 class="title-head">Recent <span>Blogs</span></h2>
+                                <p>Know useful information for yourself.</p>
+                            </div>
+                        </div>
+                        <div class="recent-news-carousel owl-carousel owl-btn-1 col-12 p-lr0">
+                            @foreach (var item in blog)
+                            {
+                                <div class="item">
+                                    <div class="recent-news">
+                                        <div class="action-box">
+                                            <img src="@Url.Content(item.Thumbnail)" style="width:360px;height: 225px" alt="">
+                                        </div>
+                                        <div class="info-bx">
+                                            <ul class="media-post">
+                                                <li><a><i class="fa fa-calendar"></i>@item.CreatedDate</a></li>
+                                                <li><a><i class="fa fa-user"></i>By @item.User.FirstName @item.User.LastName</a></li>
+                                            </ul>
+                                            <h5 class="post-title"><a href="@Url.Action("Details", "Blogs", new {id = item.BlogID })">@item.BlogName</a></h5>
+                                            <p>@item.ShortDescription...</p>
+                                            <div class="post-extra">
+                                                <a href="@Url.Action("Details", "Blogs", new {id = item.BlogID })" class="btn-link">READ MORE</a>
+                                                <a class="comments-bx"><i class="fa fa-comments-o"></i>@item.BlogComments.Count Comment</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @{Html.RenderAction("_Footer", "Home");}
+
+        <button class="back-to-top fa fa-chevron-up"></button>
+    </div>
+
+    <!-- External JavaScripts -->
+    <script src="~/Content/assets/js/jquery.min.js"></script>
+    <script src="~/Content/assets/vendors/bootstrap/js/popper.min.js"></script>
+    <script src="~/Content/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="~/Content/assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+    <script src="~/Content/assets/vendors/magnific-popup/magnific-popup.js"></script>
+    <script src="~/Content/assets/vendors/counter/waypoints-min.js"></script>
+    <script src="~/Content/assets/vendors/counter/counterup.min.js"></script>
+    <script src="~/Content/assets/vendors/imagesloaded/imagesloaded.js"></script>
+    <script src="~/Content/assets/vendors/masonry/masonry.js"></script>
+    <script src="~/Content/assets/vendors/masonry/filter.js"></script>
+    <script src="~/Content/assets/vendors/owl-carousel/owl.carousel.js"></script>
+    <script src="~/Content/assets/js/functions.js"></script>
+    <script src="~/Content/assets/js/contact.js"></script>
+    <script src='~/Content/assets/vendors/switcher/switcher.js'></script>
+    <!-- Revolution JavaScripts Files -->
+    <script src="~/Content/assets/vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
+    <script src="~/Content/assets/vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
+    <!-- Slider revolution 5.0 Extensions  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+    <script src="~/Content/assets/vendors/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+    <script src="~/Content/assets/vendors/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+    <script src="~/Content/assets/vendors/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script src="~/Content/assets/vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script src="~/Content/assets/vendors/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+    <script src="~/Content/assets/vendors/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script src="~/Content/assets/vendors/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script src="~/Content/assets/vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script src="~/Content/assets/vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
+    <script src="~/Asset/plugins/toastr/toastr.min.js"></script>
+
+
+    @Html.Partial("SweetAlertClient")
+    <script>
+        jQuery(document).ready(function () {
+            var ttrevapi;
+            var tpj = jQuery;
+            if (tpj("#rev_slider_486_1").revolution == undefined) {
+                revslider_showDoubleJqueryError("#rev_slider_486_1");
+            } else {
+                ttrevapi = tpj("#rev_slider_486_1").show().revolution({
+                    sliderType: "standard",
+                    jsFileLocation: "/Content/assets/vendors/revolution/js/",
+                    sliderLayout: "fullwidth",
+                    dottedOverlay: "none",
+                    delay: 9000,
+                    navigation: {
+                        keyboardNavigation: "on",
+                        keyboard_direction: "horizontal",
+                        mouseScrollNavigation: "off",
+                        mouseScrollReverse: "default",
+                        onHoverStop: "on",
+                        touch: {
+                            touchenabled: "on",
+                            swipe_threshold: 75,
+                            swipe_min_touches: 1,
+                            swipe_direction: "horizontal",
+                            drag_block_vertical: false
+                        }
+                        ,
+                        arrows: {
+                            style: "uranus",
+                            enable: true,
+                            hide_onmobile: false,
+                            hide_onleave: false,
+                            tmp: '',
+                            left: {
+                                h_align: "left",
+                                v_align: "center",
+                                h_offset: 10,
+                                v_offset: 0
+                            },
+                            right: {
+                                h_align: "right",
+                                v_align: "center",
+                                h_offset: 10,
+                                v_offset: 0
+                            }
+                        },
+
+                    },
+                    viewPort: {
+                        enable: true,
+                        outof: "pause",
+                        visible_area: "80%",
+                        presize: false
+                    },
+                    responsiveLevels: [1240, 1024, 778, 480],
+                    visibilityLevels: [1240, 1024, 778, 480],
+                    gridwidth: [1240, 1024, 778, 480],
+                    gridheight: [768, 600, 600, 600],
+                    lazyType: "none",
+                    parallax: {
+                        type: "scroll",
+                        origo: "enterpoint",
+                        speed: 400,
+                        levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 46, 47, 48, 49, 50, 55],
+                        type: "scroll",
+                    },
+                    shadow: 0,
+                    spinner: "off",
+                    stopLoop: "off",
+                    stopAfterLoops: -1,
+                    stopAtSlide: -1,
+                    shuffle: "off",
+                    autoHeight: "off",
+                    hideThumbsOnMobile: "off",
+                    hideSliderAtLimit: 0,
+                    hideCaptionAtLimit: 0,
+                    hideAllCaptionAtLilmit: 0,
+                    debugMode: false,
+                    fallbacks: {
+                        simplifyAll: "off",
+                        nextSlideOnWindowFocus: "off",
+                        disableFocusListener: false,
+                    }
+                });
+            }
+        });
+
+
+        var settings = {
+            "url": "https://api.covid19api.com/summary",
+            "method": "GET",
+            "timeout": 0,
+            "headers": {
+                "X-Access-Token": "5cf9dfd5-3449-485e-b5ae-70a60e997864"
+            },
+        };
+
+        $.ajax(settings).done(function (response) {
+
+            $(".totalConfirmed").empty().append(response.Countries[184].TotalConfirmed);
+            $(".newConfirmed").empty().append(response.Countries[184].NewConfirmed);
+            $(".totalDeaths").empty().append(response.Countries[184].TotalDeaths);
+            $(".totalRecovered").empty().append(response.Countries[184].TotalRecovered);
+            
+
+            $(".globtotalConfirmed").empty().append(response.Global.TotalConfirmed);
+            $(".globnewConfirmed").empty().append(response.Global.NewConfirmed);
+            $(".globtotalDeaths").empty().append(response.Global.TotalDeaths);
+            $(".globtotalRecovered").empty().append(response.Global.TotalRecovered);
+
+            date = new Date(response.Countries[184].Date);
+
+            $(".vnDate").empty().append(date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear());
+        });
+    </script>
+
+    <script>
+        $('#slMenu').on('change', function (e) {
+            var optionSelected = $("option", this);
+            window.location.href = this.value;
+            });
+    </script>
+
+</body>
+
+</html>

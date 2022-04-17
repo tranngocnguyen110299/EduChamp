@@ -1,0 +1,99 @@
+﻿@model IEnumerable<TN_academic.Models.LectureComment>
+
+@{
+    ViewBag.Title = "Manage Lecture Comments";
+    ViewBag.Manage = "Manage Lecture Comments";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string isChecked = "";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data of Lecture Comments</h3>
+            </div>
+            <div class="card-body">
+                <table id="tbl_LectureComments" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Username)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.User.FirstName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Lecture.LectureName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Content)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CreatedDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Username)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Lecture.LectureName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Content)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                                </td>
+                                <td>
+                                    @if (item.Status == true)
+                                    {
+                                        isChecked = "checked";
+                                    }
+                                    else
+                                    {
+                                        isChecked = "";
+                                    }
+                                    <input type="checkbox" data-id="@item.CommentID" data-on-text="show" data-off-text="hide" id="chkStatus" name="my-checkbox" @isChecked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                </td>
+
+                            <td class="project-actions text-right">
+                                <a class="btn btn-info btn-sm" href="~/Admin/LectureComments/ReplyLecture/@item.CommentID">
+                                    <i class="fas fa-comment">
+                                    </i>
+                                    Reply
+                                </a>
+                                <a class="btn btn-danger btn-sm" href="~/Admin/LectureComments/Delete/@item.CommentID">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section ScriptConfig
+{
+    @Styles.Render("~/asset/css/datatable")
+    @Scripts.Render("~/asset/scripts/datatable")
+    <script src="~/Asset/ajaxChangeSatus/lectureComment.js"></script>
+}

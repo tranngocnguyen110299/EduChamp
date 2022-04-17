@@ -1,0 +1,1960 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TN_academic_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AboutUs">
+          <Key>
+            <PropertyRef Name="AboutUsID" />
+          </Key>
+          <Property Name="AboutUsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="text" />
+        </EntityType>
+        <EntityType Name="BlogCategories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="BlogComments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="BlogID" Type="int" />
+          <Property Name="Content" Type="text" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Blogs">
+          <Key>
+            <PropertyRef Name="BlogID" />
+          </Key>
+          <Property Name="BlogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="Content" Type="text" />
+          <Property Name="Thumbnail" Type="text" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Thumbnail" Type="text" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="Fax" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="text" />
+        </EntityType>
+        <EntityType Name="Coupons">
+          <Key>
+            <PropertyRef Name="CouponID" />
+          </Key>
+          <Property Name="CouponID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CouponCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CouponName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Thumbnail" Type="text" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="CourseComments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="Content" Type="text" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="OldPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Thumbnail" Type="text" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Examination">
+          <Key>
+            <PropertyRef Name="ExamID" />
+          </Key>
+          <Property Name="ExamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamName" Type="nvarchar" MaxLength="255" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="Time" Type="int" />
+          <Property Name="ExaminationDate" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="ExaminationContent">
+          <Key>
+            <PropertyRef Name="ExamID" />
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="ExamID" Type="int" Nullable="false" />
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+          <Property Name="Mark" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="ExamResults">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="ExamID" Type="int" />
+          <Property Name="ExamDate" Type="datetime" />
+          <Property Name="Result" Type="nvarchar" MaxLength="10" />
+          <Property Name="Mark" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="LectureComments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="LectureID" Type="int" />
+          <Property Name="Content" Type="text" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Lectures">
+          <Key>
+            <PropertyRef Name="LectureID" />
+          </Key>
+          <Property Name="LectureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LectureName" Type="nvarchar" MaxLength="255" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="Overview" Type="text" />
+          <Property Name="Path" Type="text" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="PaymentID" Type="int" />
+          <Property Name="PaymentStatus" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CouponID" Type="int" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeID" Type="int" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Content" Type="text" />
+          <Property Name="ChoiceA" Type="text" />
+          <Property Name="ChoiceB" Type="text" />
+          <Property Name="ChoiceC" Type="text" />
+          <Property Name="ChoiceD" Type="text" />
+          <Property Name="Answer" Type="text" />
+          <Property Name="Level" Type="int" />
+        </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ReplyingBlogComments">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="CommentID" Type="int" />
+          <Property Name="Content" Type="text" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="ReplyingCourseComments">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="CommentID" Type="int" />
+          <Property Name="Content" Type="text" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="ReplyingLectureComments">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="CommentID" Type="int" />
+          <Property Name="Content" Type="text" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
+          <Property Name="Gender" Type="bit" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="60" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Avatar" Type="text" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="Role" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="UserStatus">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsBlock" Type="bit" />
+        </EntityType>
+        <Association Name="FK__BlogComme__BlogI__35BCFE0A">
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="0..1" />
+          <End Role="BlogComments" Type="Self.BlogComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blogs">
+              <PropertyRef Name="BlogID" />
+            </Principal>
+            <Dependent Role="BlogComments">
+              <PropertyRef Name="BlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BlogComme__Usern__34C8D9D1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="BlogComments" Type="Self.BlogComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="BlogComments">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Blogs__CategoryI__31EC6D26">
+          <End Role="BlogCategories" Type="Self.BlogCategories" Multiplicity="0..1" />
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogCategories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Blogs">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Blogs__Username__30F848ED">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Blogs">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CourseCom__Cours__46E78A0C">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="CourseComments" Type="Self.CourseComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CourseComments">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CourseCom__Usern__45F365D3">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="CourseComments" Type="Self.CourseComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="CourseComments">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Courses__Categor__4316F928">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Courses__Usernam__4222D4EF">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examinati__Cours__5CD6CB2B">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examinati__ExamI__656C112C">
+          <End Role="Examination" Type="Self.Examination" Multiplicity="1" />
+          <End Role="ExaminationContent" Type="Self.ExaminationContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examination">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="ExaminationContent">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examinati__Quest__66603565">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="ExaminationContent" Type="Self.ExaminationContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="ExaminationContent">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExamResul__ExamI__6A30C649">
+          <End Role="Examination" Type="Self.Examination" Multiplicity="0..1" />
+          <End Role="ExamResults" Type="Self.ExamResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examination">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="ExamResults">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExamResul__Usern__693CA210">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ExamResults" Type="Self.ExamResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="ExamResults">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LectureCo__Lectu__5165187F">
+          <End Role="Lectures" Type="Self.Lectures" Multiplicity="0..1" />
+          <End Role="LectureComments" Type="Self.LectureComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lectures">
+              <PropertyRef Name="LectureID" />
+            </Principal>
+            <Dependent Role="LectureComments">
+              <PropertyRef Name="LectureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LectureCo__Usern__5070F446">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="LectureComments" Type="Self.LectureComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="LectureComments">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lectures__Course__4D94879B">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Lectures" Type="Self.Lectures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Lectures">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Cours__14270015">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Order__1332DBDC">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__CouponID__10566F31">
+          <End Role="Coupons" Type="Self.Coupons" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupons">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__PaymentI__0F624AF8">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__Username__0E6E26BF">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Questions__Cours__628FA481">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Questions__TypeI__619B8048">
+          <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="0..1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionType">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingB__Comme__398D8EEE">
+          <End Role="BlogComments" Type="Self.BlogComments" Multiplicity="0..1" />
+          <End Role="ReplyingBlogComments" Type="Self.ReplyingBlogComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogComments">
+              <PropertyRef Name="CommentID" />
+            </Principal>
+            <Dependent Role="ReplyingBlogComments">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingB__Usern__38996AB5">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ReplyingBlogComments" Type="Self.ReplyingBlogComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="ReplyingBlogComments">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingC__Comme__4AB81AF0">
+          <End Role="CourseComments" Type="Self.CourseComments" Multiplicity="0..1" />
+          <End Role="ReplyingCourseComments" Type="Self.ReplyingCourseComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseComments">
+              <PropertyRef Name="CommentID" />
+            </Principal>
+            <Dependent Role="ReplyingCourseComments">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingC__Usern__49C3F6B7">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ReplyingCourseComments" Type="Self.ReplyingCourseComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="ReplyingCourseComments">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingL__Comme__5535A963">
+          <End Role="LectureComments" Type="Self.LectureComments" Multiplicity="0..1" />
+          <End Role="ReplyingLectureComments" Type="Self.ReplyingLectureComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LectureComments">
+              <PropertyRef Name="CommentID" />
+            </Principal>
+            <Dependent Role="ReplyingLectureComments">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingL__Usern__5441852A">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ReplyingLectureComments" Type="Self.ReplyingLectureComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="ReplyingLectureComments">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__StatusID__7C4F7684">
+          <End Role="UserStatus" Type="Self.UserStatus" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TN_academic_DBModelStoreContainer">
+          <EntitySet Name="AboutUs" EntityType="Self.AboutUs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogCategories" EntityType="Self.BlogCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogComments" EntityType="Self.BlogComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coupons" EntityType="Self.Coupons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseComments" EntityType="Self.CourseComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Examination" EntityType="Self.Examination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExaminationContent" EntityType="Self.ExaminationContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExamResults" EntityType="Self.ExamResults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LectureComments" EntityType="Self.LectureComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lectures" EntityType="Self.Lectures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionType" EntityType="Self.QuestionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplyingBlogComments" EntityType="Self.ReplyingBlogComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplyingCourseComments" EntityType="Self.ReplyingCourseComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplyingLectureComments" EntityType="Self.ReplyingLectureComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserStatus" EntityType="Self.UserStatus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BlogComme__BlogI__35BCFE0A" Association="Self.FK__BlogComme__BlogI__35BCFE0A">
+            <End Role="Blogs" EntitySet="Blogs" />
+            <End Role="BlogComments" EntitySet="BlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BlogComme__Usern__34C8D9D1" Association="Self.FK__BlogComme__Usern__34C8D9D1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BlogComments" EntitySet="BlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Blogs__CategoryI__31EC6D26" Association="Self.FK__Blogs__CategoryI__31EC6D26">
+            <End Role="BlogCategories" EntitySet="BlogCategories" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Blogs__Username__30F848ED" Association="Self.FK__Blogs__Username__30F848ED">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseCom__Cours__46E78A0C" Association="Self.FK__CourseCom__Cours__46E78A0C">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseComments" EntitySet="CourseComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseCom__Usern__45F365D3" Association="Self.FK__CourseCom__Usern__45F365D3">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CourseComments" EntitySet="CourseComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Courses__Categor__4316F928" Association="Self.FK__Courses__Categor__4316F928">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Courses__Usernam__4222D4EF" Association="Self.FK__Courses__Usernam__4222D4EF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examinati__Cours__5CD6CB2B" Association="Self.FK__Examinati__Cours__5CD6CB2B">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examinati__ExamI__656C112C" Association="Self.FK__Examinati__ExamI__656C112C">
+            <End Role="Examination" EntitySet="Examination" />
+            <End Role="ExaminationContent" EntitySet="ExaminationContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examinati__Quest__66603565" Association="Self.FK__Examinati__Quest__66603565">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="ExaminationContent" EntitySet="ExaminationContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExamResul__ExamI__6A30C649" Association="Self.FK__ExamResul__ExamI__6A30C649">
+            <End Role="Examination" EntitySet="Examination" />
+            <End Role="ExamResults" EntitySet="ExamResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExamResul__Usern__693CA210" Association="Self.FK__ExamResul__Usern__693CA210">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ExamResults" EntitySet="ExamResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LectureCo__Lectu__5165187F" Association="Self.FK__LectureCo__Lectu__5165187F">
+            <End Role="Lectures" EntitySet="Lectures" />
+            <End Role="LectureComments" EntitySet="LectureComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LectureCo__Usern__5070F446" Association="Self.FK__LectureCo__Usern__5070F446">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LectureComments" EntitySet="LectureComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lectures__Course__4D94879B" Association="Self.FK__Lectures__Course__4D94879B">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Lectures" EntitySet="Lectures" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Cours__14270015" Association="Self.FK__OrderDeta__Cours__14270015">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Order__1332DBDC" Association="Self.FK__OrderDeta__Order__1332DBDC">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__CouponID__10566F31" Association="Self.FK__Orders__CouponID__10566F31">
+            <End Role="Coupons" EntitySet="Coupons" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__PaymentI__0F624AF8" Association="Self.FK__Orders__PaymentI__0F624AF8">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Username__0E6E26BF" Association="Self.FK__Orders__Username__0E6E26BF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Questions__Cours__628FA481" Association="Self.FK__Questions__Cours__628FA481">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Questions__TypeI__619B8048" Association="Self.FK__Questions__TypeI__619B8048">
+            <End Role="QuestionType" EntitySet="QuestionType" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingB__Comme__398D8EEE" Association="Self.FK__ReplyingB__Comme__398D8EEE">
+            <End Role="BlogComments" EntitySet="BlogComments" />
+            <End Role="ReplyingBlogComments" EntitySet="ReplyingBlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingB__Usern__38996AB5" Association="Self.FK__ReplyingB__Usern__38996AB5">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReplyingBlogComments" EntitySet="ReplyingBlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingC__Comme__4AB81AF0" Association="Self.FK__ReplyingC__Comme__4AB81AF0">
+            <End Role="CourseComments" EntitySet="CourseComments" />
+            <End Role="ReplyingCourseComments" EntitySet="ReplyingCourseComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingC__Usern__49C3F6B7" Association="Self.FK__ReplyingC__Usern__49C3F6B7">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReplyingCourseComments" EntitySet="ReplyingCourseComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingL__Comme__5535A963" Association="Self.FK__ReplyingL__Comme__5535A963">
+            <End Role="LectureComments" EntitySet="LectureComments" />
+            <End Role="ReplyingLectureComments" EntitySet="ReplyingLectureComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingL__Usern__5441852A" Association="Self.FK__ReplyingL__Usern__5441852A">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReplyingLectureComments" EntitySet="ReplyingLectureComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__StatusID__7C4F7684" Association="Self.FK__Users__StatusID__7C4F7684">
+            <End Role="UserStatus" EntitySet="UserStatus" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TN_academic_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TN_academic_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AboutUs" EntityType="TN_academic_DBModel.AboutU" />
+          <EntitySet Name="BlogCategories" EntityType="TN_academic_DBModel.BlogCategory" />
+          <EntitySet Name="BlogComments" EntityType="TN_academic_DBModel.BlogComment" />
+          <EntitySet Name="Blogs" EntityType="TN_academic_DBModel.Blog" />
+          <EntitySet Name="Categories" EntityType="TN_academic_DBModel.Category" />
+          <EntitySet Name="Contacts" EntityType="TN_academic_DBModel.Contact" />
+          <EntitySet Name="Coupons" EntityType="TN_academic_DBModel.Coupon" />
+          <EntitySet Name="CourseComments" EntityType="TN_academic_DBModel.CourseComment" />
+          <EntitySet Name="Courses" EntityType="TN_academic_DBModel.Cours" />
+          <EntitySet Name="Examinations" EntityType="TN_academic_DBModel.Examination" />
+          <EntitySet Name="ExaminationContents" EntityType="TN_academic_DBModel.ExaminationContent" />
+          <EntitySet Name="ExamResults" EntityType="TN_academic_DBModel.ExamResult" />
+          <EntitySet Name="LectureComments" EntityType="TN_academic_DBModel.LectureComment" />
+          <EntitySet Name="Lectures" EntityType="TN_academic_DBModel.Lecture" />
+          <EntitySet Name="OrderDetails" EntityType="TN_academic_DBModel.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="TN_academic_DBModel.Order" />
+          <EntitySet Name="Payments" EntityType="TN_academic_DBModel.Payment" />
+          <EntitySet Name="Questions" EntityType="TN_academic_DBModel.Question" />
+          <EntitySet Name="QuestionTypes" EntityType="TN_academic_DBModel.QuestionType" />
+          <EntitySet Name="ReplyingBlogComments" EntityType="TN_academic_DBModel.ReplyingBlogComment" />
+          <EntitySet Name="ReplyingCourseComments" EntityType="TN_academic_DBModel.ReplyingCourseComment" />
+          <EntitySet Name="ReplyingLectureComments" EntityType="TN_academic_DBModel.ReplyingLectureComment" />
+          <EntitySet Name="sysdiagrams" EntityType="TN_academic_DBModel.sysdiagram" />
+          <EntitySet Name="Users" EntityType="TN_academic_DBModel.User" />
+          <EntitySet Name="UserStatus" EntityType="TN_academic_DBModel.UserStatu" />
+          <AssociationSet Name="FK__Blogs__CategoryI__31EC6D26" Association="TN_academic_DBModel.FK__Blogs__CategoryI__31EC6D26">
+            <End Role="BlogCategory" EntitySet="BlogCategories" />
+            <End Role="Blog" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BlogComme__BlogI__35BCFE0A" Association="TN_academic_DBModel.FK__BlogComme__BlogI__35BCFE0A">
+            <End Role="Blog" EntitySet="Blogs" />
+            <End Role="BlogComment" EntitySet="BlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BlogComme__Usern__34C8D9D1" Association="TN_academic_DBModel.FK__BlogComme__Usern__34C8D9D1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BlogComment" EntitySet="BlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingB__Comme__398D8EEE" Association="TN_academic_DBModel.FK__ReplyingB__Comme__398D8EEE">
+            <End Role="BlogComment" EntitySet="BlogComments" />
+            <End Role="ReplyingBlogComment" EntitySet="ReplyingBlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Blogs__Username__30F848ED" Association="TN_academic_DBModel.FK__Blogs__Username__30F848ED">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Blog" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Courses__Categor__4316F928" Association="TN_academic_DBModel.FK__Courses__Categor__4316F928">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Cours" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__CouponID__10566F31" Association="TN_academic_DBModel.FK__Orders__CouponID__10566F31">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseCom__Cours__46E78A0C" Association="TN_academic_DBModel.FK__CourseCom__Cours__46E78A0C">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="CourseComment" EntitySet="CourseComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseCom__Usern__45F365D3" Association="TN_academic_DBModel.FK__CourseCom__Usern__45F365D3">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CourseComment" EntitySet="CourseComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingC__Comme__4AB81AF0" Association="TN_academic_DBModel.FK__ReplyingC__Comme__4AB81AF0">
+            <End Role="CourseComment" EntitySet="CourseComments" />
+            <End Role="ReplyingCourseComment" EntitySet="ReplyingCourseComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Courses__Usernam__4222D4EF" Association="TN_academic_DBModel.FK__Courses__Usernam__4222D4EF">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Cours" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examinati__Cours__5CD6CB2B" Association="TN_academic_DBModel.FK__Examinati__Cours__5CD6CB2B">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Examination" EntitySet="Examinations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lectures__Course__4D94879B" Association="TN_academic_DBModel.FK__Lectures__Course__4D94879B">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Lecture" EntitySet="Lectures" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Cours__14270015" Association="TN_academic_DBModel.FK__OrderDeta__Cours__14270015">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Questions__Cours__628FA481" Association="TN_academic_DBModel.FK__Questions__Cours__628FA481">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examinati__ExamI__656C112C" Association="TN_academic_DBModel.FK__Examinati__ExamI__656C112C">
+            <End Role="Examination" EntitySet="Examinations" />
+            <End Role="ExaminationContent" EntitySet="ExaminationContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExamResul__ExamI__6A30C649" Association="TN_academic_DBModel.FK__ExamResul__ExamI__6A30C649">
+            <End Role="Examination" EntitySet="Examinations" />
+            <End Role="ExamResult" EntitySet="ExamResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Examinati__Quest__66603565" Association="TN_academic_DBModel.FK__Examinati__Quest__66603565">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="ExaminationContent" EntitySet="ExaminationContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExamResul__Usern__693CA210" Association="TN_academic_DBModel.FK__ExamResul__Usern__693CA210">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ExamResult" EntitySet="ExamResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LectureCo__Lectu__5165187F" Association="TN_academic_DBModel.FK__LectureCo__Lectu__5165187F">
+            <End Role="Lecture" EntitySet="Lectures" />
+            <End Role="LectureComment" EntitySet="LectureComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LectureCo__Usern__5070F446" Association="TN_academic_DBModel.FK__LectureCo__Usern__5070F446">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LectureComment" EntitySet="LectureComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingL__Comme__5535A963" Association="TN_academic_DBModel.FK__ReplyingL__Comme__5535A963">
+            <End Role="LectureComment" EntitySet="LectureComments" />
+            <End Role="ReplyingLectureComment" EntitySet="ReplyingLectureComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Order__1332DBDC" Association="TN_academic_DBModel.FK__OrderDeta__Order__1332DBDC">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__PaymentI__0F624AF8" Association="TN_academic_DBModel.FK__Orders__PaymentI__0F624AF8">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Username__0E6E26BF" Association="TN_academic_DBModel.FK__Orders__Username__0E6E26BF">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Questions__TypeI__619B8048" Association="TN_academic_DBModel.FK__Questions__TypeI__619B8048">
+            <End Role="QuestionType" EntitySet="QuestionTypes" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingB__Usern__38996AB5" Association="TN_academic_DBModel.FK__ReplyingB__Usern__38996AB5">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ReplyingBlogComment" EntitySet="ReplyingBlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingC__Usern__49C3F6B7" Association="TN_academic_DBModel.FK__ReplyingC__Usern__49C3F6B7">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ReplyingCourseComment" EntitySet="ReplyingCourseComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyingL__Usern__5441852A" Association="TN_academic_DBModel.FK__ReplyingL__Usern__5441852A">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ReplyingLectureComment" EntitySet="ReplyingLectureComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__StatusID__7C4F7684" Association="TN_academic_DBModel.FK__Users__StatusID__7C4F7684">
+            <End Role="UserStatu" EntitySet="UserStatus" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AboutU">
+          <Key>
+            <PropertyRef Name="AboutUsID" />
+          </Key>
+          <Property Name="AboutUsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BlogCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Blogs" Relationship="TN_academic_DBModel.FK__Blogs__CategoryI__31EC6D26" FromRole="BlogCategory" ToRole="Blog" />
+        </EntityType>
+        <EntityType Name="BlogComment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BlogID" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Blog" Relationship="TN_academic_DBModel.FK__BlogComme__BlogI__35BCFE0A" FromRole="BlogComment" ToRole="Blog" />
+          <NavigationProperty Name="User" Relationship="TN_academic_DBModel.FK__BlogComme__Usern__34C8D9D1" FromRole="BlogComment" ToRole="User" />
+          <NavigationProperty Name="ReplyingBlogComments" Relationship="TN_academic_DBModel.FK__ReplyingB__Comme__398D8EEE" FromRole="BlogComment" ToRole="ReplyingBlogComment" />
+        </EntityType>
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="BlogID" />
+          </Key>
+          <Property Name="BlogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="ShortDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BlogCategory" Relationship="TN_academic_DBModel.FK__Blogs__CategoryI__31EC6D26" FromRole="Blog" ToRole="BlogCategory" />
+          <NavigationProperty Name="BlogComments" Relationship="TN_academic_DBModel.FK__BlogComme__BlogI__35BCFE0A" FromRole="Blog" ToRole="BlogComment" />
+          <NavigationProperty Name="User" Relationship="TN_academic_DBModel.FK__Blogs__Username__30F848ED" FromRole="Blog" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Courses" Relationship="TN_academic_DBModel.FK__Courses__Categor__4316F928" FromRole="Category" ToRole="Cours" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="CouponID" />
+          </Key>
+          <Property Name="CouponID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CouponName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Orders" Relationship="TN_academic_DBModel.FK__Orders__CouponID__10566F31" FromRole="Coupon" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="CourseComment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Cours" Relationship="TN_academic_DBModel.FK__CourseCom__Cours__46E78A0C" FromRole="CourseComment" ToRole="Cours" />
+          <NavigationProperty Name="User" Relationship="TN_academic_DBModel.FK__CourseCom__Usern__45F365D3" FromRole="CourseComment" ToRole="User" />
+          <NavigationProperty Name="ReplyingCourseComments" Relationship="TN_academic_DBModel.FK__ReplyingC__Comme__4AB81AF0" FromRole="CourseComment" ToRole="ReplyingCourseComment" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="OldPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ShortDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="TN_academic_DBModel.FK__Courses__Categor__4316F928" FromRole="Cours" ToRole="Category" />
+          <NavigationProperty Name="CourseComments" Relationship="TN_academic_DBModel.FK__CourseCom__Cours__46E78A0C" FromRole="Cours" ToRole="CourseComment" />
+          <NavigationProperty Name="User" Relationship="TN_academic_DBModel.FK__Courses__Usernam__4222D4EF" FromRole="Cours" ToRole="User" />
+          <NavigationProperty Name="Examinations" Relationship="TN_academic_DBModel.FK__Examinati__Cours__5CD6CB2B" FromRole="Cours" ToRole="Examination" />
+          <NavigationProperty Name="Lectures" Relationship="TN_academic_DBModel.FK__Lectures__Course__4D94879B" FromRole="Cours" ToRole="Lecture" />
+          <NavigationProperty Name="OrderDetails" Relationship="TN_academic_DBModel.FK__OrderDeta__Cours__14270015" FromRole="Cours" ToRole="OrderDetail" />
+          <NavigationProperty Name="Questions" Relationship="TN_academic_DBModel.FK__Questions__Cours__628FA481" FromRole="Cours" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Examination">
+          <Key>
+            <PropertyRef Name="ExamID" />
+          </Key>
+          <Property Name="ExamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="Time" Type="Int32" />
+          <Property Name="ExaminationDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Cours" Relationship="TN_academic_DBModel.FK__Examinati__Cours__5CD6CB2B" FromRole="Examination" ToRole="Cours" />
+          <NavigationProperty Name="ExaminationContents" Relationship="TN_academic_DBModel.FK__Examinati__ExamI__656C112C" FromRole="Examination" ToRole="ExaminationContent" />
+          <NavigationProperty Name="ExamResults" Relationship="TN_academic_DBModel.FK__ExamResul__ExamI__6A30C649" FromRole="Examination" ToRole="ExamResult" />
+        </EntityType>
+        <EntityType Name="ExaminationContent">
+          <Key>
+            <PropertyRef Name="ExamID" />
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="ExamID" Type="Int32" Nullable="false" />
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <Property Name="Mark" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Examination" Relationship="TN_academic_DBModel.FK__Examinati__ExamI__656C112C" FromRole="ExaminationContent" ToRole="Examination" />
+          <NavigationProperty Name="Question" Relationship="TN_academic_DBModel.FK__Examinati__Quest__66603565" FromRole="ExaminationContent" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="ExamResult">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExamID" Type="Int32" />
+          <Property Name="ExamDate" Type="DateTime" Precision="3" />
+          <Property Name="Result" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Mark" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Examination" Relationship="TN_academic_DBModel.FK__ExamResul__ExamI__6A30C649" FromRole="ExamResult" ToRole="Examination" />
+          <NavigationProperty Name="User" Relationship="TN_academic_DBModel.FK__ExamResul__Usern__693CA210" FromRole="ExamResult" ToRole="User" />
+        </EntityType>
+        <EntityType Name="LectureComment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LectureID" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Lecture" Relationship="TN_academic_DBModel.FK__LectureCo__Lectu__5165187F" FromRole="LectureComment" ToRole="Lecture" />
+          <NavigationProperty Name="User" Relationship="TN_academic_DBModel.FK__LectureCo__Usern__5070F446" FromRole="LectureComment" ToRole="User" />
+          <NavigationProperty Name="ReplyingLectureComments" Relationship="TN_academic_DBModel.FK__ReplyingL__Comme__5535A963" FromRole="LectureComment" ToRole="ReplyingLectureComment" />
+        </EntityType>
+        <EntityType Name="Lecture">
+          <Key>
+            <PropertyRef Name="LectureID" />
+          </Key>
+          <Property Name="LectureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LectureName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="Overview" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cours" Relationship="TN_academic_DBModel.FK__Lectures__Course__4D94879B" FromRole="Lecture" ToRole="Cours" />
+          <NavigationProperty Name="LectureComments" Relationship="TN_academic_DBModel.FK__LectureCo__Lectu__5165187F" FromRole="Lecture" ToRole="LectureComment" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Cours" Relationship="TN_academic_DBModel.FK__OrderDeta__Cours__14270015" FromRole="OrderDetail" ToRole="Cours" />
+          <NavigationProperty Name="Order" Relationship="TN_academic_DBModel.FK__OrderDeta__Order__1332DBDC" FromRole="OrderDetail" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentID" Type="Int32" />
+          <Property Name="PaymentStatus" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CouponID" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Coupon" Relationship="TN_academic_DBModel.FK__Orders__CouponID__10566F31" FromRole="Order" ToRole="Coupon" />
+          <NavigationProperty Name="OrderDetails" Relationship="TN_academic_DBModel.FK__OrderDeta__Order__1332DBDC" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="Payment" Relationship="TN_academic_DBModel.FK__Orders__PaymentI__0F624AF8" FromRole="Order" ToRole="Payment" />
+          <NavigationProperty Name="User" Relationship="TN_academic_DBModel.FK__Orders__Username__0E6E26BF" FromRole="Order" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="TN_academic_DBModel.FK__Orders__PaymentI__0F624AF8" FromRole="Payment" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeID" Type="Int32" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ChoiceA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ChoiceB" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ChoiceC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ChoiceD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Level" Type="Int32" />
+          <NavigationProperty Name="Cours" Relationship="TN_academic_DBModel.FK__Questions__Cours__628FA481" FromRole="Question" ToRole="Cours" />
+          <NavigationProperty Name="ExaminationContents" Relationship="TN_academic_DBModel.FK__Examinati__Quest__66603565" FromRole="Question" ToRole="ExaminationContent" />
+          <NavigationProperty Name="QuestionType" Relationship="TN_academic_DBModel.FK__Questions__TypeI__619B8048" FromRole="Question" ToRole="QuestionType" />
+        </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Questions" Relationship="TN_academic_DBModel.FK__Questions__TypeI__619B8048" FromRole="QuestionType" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="ReplyingBlogComment">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CommentID" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="BlogComment" Relationship="TN_academic_DBModel.FK__ReplyingB__Comme__398D8EEE" FromRole="ReplyingBlogComment" ToRole="BlogComment" />
+          <NavigationProperty Name="User" Relationship="TN_academic_DBModel.FK__ReplyingB__Usern__38996AB5" FromRole="ReplyingBlogComment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ReplyingCourseComment">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CommentID" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="CourseComment" Relationship="TN_academic_DBModel.FK__ReplyingC__Comme__4AB81AF0" FromRole="ReplyingCourseComment" ToRole="CourseComment" />
+          <NavigationProperty Name="User" Relationship="TN_academic_DBModel.FK__ReplyingC__Usern__49C3F6B7" FromRole="ReplyingCourseComment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ReplyingLectureComment">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CommentID" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="LectureComment" Relationship="TN_academic_DBModel.FK__ReplyingL__Comme__5535A963" FromRole="ReplyingLectureComment" ToRole="LectureComment" />
+          <NavigationProperty Name="User" Relationship="TN_academic_DBModel.FK__ReplyingL__Usern__5441852A" FromRole="ReplyingLectureComment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="Boolean" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="Role" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BlogComments" Relationship="TN_academic_DBModel.FK__BlogComme__Usern__34C8D9D1" FromRole="User" ToRole="BlogComment" />
+          <NavigationProperty Name="Blogs" Relationship="TN_academic_DBModel.FK__Blogs__Username__30F848ED" FromRole="User" ToRole="Blog" />
+          <NavigationProperty Name="CourseComments" Relationship="TN_academic_DBModel.FK__CourseCom__Usern__45F365D3" FromRole="User" ToRole="CourseComment" />
+          <NavigationProperty Name="Courses" Relationship="TN_academic_DBModel.FK__Courses__Usernam__4222D4EF" FromRole="User" ToRole="Cours" />
+          <NavigationProperty Name="ExamResults" Relationship="TN_academic_DBModel.FK__ExamResul__Usern__693CA210" FromRole="User" ToRole="ExamResult" />
+          <NavigationProperty Name="LectureComments" Relationship="TN_academic_DBModel.FK__LectureCo__Usern__5070F446" FromRole="User" ToRole="LectureComment" />
+          <NavigationProperty Name="Orders" Relationship="TN_academic_DBModel.FK__Orders__Username__0E6E26BF" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="ReplyingBlogComments" Relationship="TN_academic_DBModel.FK__ReplyingB__Usern__38996AB5" FromRole="User" ToRole="ReplyingBlogComment" />
+          <NavigationProperty Name="ReplyingCourseComments" Relationship="TN_academic_DBModel.FK__ReplyingC__Usern__49C3F6B7" FromRole="User" ToRole="ReplyingCourseComment" />
+          <NavigationProperty Name="ReplyingLectureComments" Relationship="TN_academic_DBModel.FK__ReplyingL__Usern__5441852A" FromRole="User" ToRole="ReplyingLectureComment" />
+          <NavigationProperty Name="UserStatu" Relationship="TN_academic_DBModel.FK__Users__StatusID__7C4F7684" FromRole="User" ToRole="UserStatu" />
+        </EntityType>
+        <EntityType Name="UserStatu">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsBlock" Type="Boolean" />
+          <NavigationProperty Name="Users" Relationship="TN_academic_DBModel.FK__Users__StatusID__7C4F7684" FromRole="UserStatu" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Blogs__CategoryI__31EC6D26">
+          <End Type="TN_academic_DBModel.BlogCategory" Role="BlogCategory" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.Blog" Role="Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Blog">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BlogComme__BlogI__35BCFE0A">
+          <End Type="TN_academic_DBModel.Blog" Role="Blog" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.BlogComment" Role="BlogComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blog">
+              <PropertyRef Name="BlogID" />
+            </Principal>
+            <Dependent Role="BlogComment">
+              <PropertyRef Name="BlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BlogComme__Usern__34C8D9D1">
+          <End Type="TN_academic_DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.BlogComment" Role="BlogComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="BlogComment">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingB__Comme__398D8EEE">
+          <End Type="TN_academic_DBModel.BlogComment" Role="BlogComment" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.ReplyingBlogComment" Role="ReplyingBlogComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogComment">
+              <PropertyRef Name="CommentID" />
+            </Principal>
+            <Dependent Role="ReplyingBlogComment">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Blogs__Username__30F848ED">
+          <End Type="TN_academic_DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.Blog" Role="Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Blog">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Courses__Categor__4316F928">
+          <End Type="TN_academic_DBModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.Cours" Role="Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Cours">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__CouponID__10566F31">
+          <End Type="TN_academic_DBModel.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CourseCom__Cours__46E78A0C">
+          <End Type="TN_academic_DBModel.Cours" Role="Cours" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.CourseComment" Role="CourseComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CourseComment">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CourseCom__Usern__45F365D3">
+          <End Type="TN_academic_DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.CourseComment" Role="CourseComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="CourseComment">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingC__Comme__4AB81AF0">
+          <End Type="TN_academic_DBModel.CourseComment" Role="CourseComment" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.ReplyingCourseComment" Role="ReplyingCourseComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseComment">
+              <PropertyRef Name="CommentID" />
+            </Principal>
+            <Dependent Role="ReplyingCourseComment">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Courses__Usernam__4222D4EF">
+          <End Type="TN_academic_DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.Cours" Role="Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Cours">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examinati__Cours__5CD6CB2B">
+          <End Type="TN_academic_DBModel.Cours" Role="Cours" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.Examination" Role="Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lectures__Course__4D94879B">
+          <End Type="TN_academic_DBModel.Cours" Role="Cours" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.Lecture" Role="Lecture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Lecture">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Cours__14270015">
+          <End Type="TN_academic_DBModel.Cours" Role="Cours" Multiplicity="1" />
+          <End Type="TN_academic_DBModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Questions__Cours__628FA481">
+          <End Type="TN_academic_DBModel.Cours" Role="Cours" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examinati__ExamI__656C112C">
+          <End Type="TN_academic_DBModel.Examination" Role="Examination" Multiplicity="1" />
+          <End Type="TN_academic_DBModel.ExaminationContent" Role="ExaminationContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examination">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="ExaminationContent">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExamResul__ExamI__6A30C649">
+          <End Type="TN_academic_DBModel.Examination" Role="Examination" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.ExamResult" Role="ExamResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examination">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="ExamResult">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Examinati__Quest__66603565">
+          <End Type="TN_academic_DBModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="TN_academic_DBModel.ExaminationContent" Role="ExaminationContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="ExaminationContent">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExamResul__Usern__693CA210">
+          <End Type="TN_academic_DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.ExamResult" Role="ExamResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="ExamResult">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LectureCo__Lectu__5165187F">
+          <End Type="TN_academic_DBModel.Lecture" Role="Lecture" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.LectureComment" Role="LectureComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecture">
+              <PropertyRef Name="LectureID" />
+            </Principal>
+            <Dependent Role="LectureComment">
+              <PropertyRef Name="LectureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LectureCo__Usern__5070F446">
+          <End Type="TN_academic_DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.LectureComment" Role="LectureComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="LectureComment">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingL__Comme__5535A963">
+          <End Type="TN_academic_DBModel.LectureComment" Role="LectureComment" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.ReplyingLectureComment" Role="ReplyingLectureComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LectureComment">
+              <PropertyRef Name="CommentID" />
+            </Principal>
+            <Dependent Role="ReplyingLectureComment">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Order__1332DBDC">
+          <End Type="TN_academic_DBModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="TN_academic_DBModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__PaymentI__0F624AF8">
+          <End Type="TN_academic_DBModel.Payment" Role="Payment" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__Username__0E6E26BF">
+          <End Type="TN_academic_DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Questions__TypeI__619B8048">
+          <End Type="TN_academic_DBModel.QuestionType" Role="QuestionType" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionType">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingB__Usern__38996AB5">
+          <End Type="TN_academic_DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.ReplyingBlogComment" Role="ReplyingBlogComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="ReplyingBlogComment">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingC__Usern__49C3F6B7">
+          <End Type="TN_academic_DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.ReplyingCourseComment" Role="ReplyingCourseComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="ReplyingCourseComment">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyingL__Usern__5441852A">
+          <End Type="TN_academic_DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.ReplyingLectureComment" Role="ReplyingLectureComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="ReplyingLectureComment">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__StatusID__7C4F7684">
+          <End Type="TN_academic_DBModel.UserStatu" Role="UserStatu" Multiplicity="0..1" />
+          <End Type="TN_academic_DBModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserStatu">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TN_academic_DBModelStoreContainer" CdmEntityContainer="TN_academic_DBEntities">
+          <EntitySetMapping Name="AboutUs">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.AboutU">
+              <MappingFragment StoreEntitySet="AboutUs">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AboutUsID" ColumnName="AboutUsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogCategories">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.BlogCategory">
+              <MappingFragment StoreEntitySet="BlogCategories">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogComments">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.BlogComment">
+              <MappingFragment StoreEntitySet="BlogComments">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.Blog">
+              <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="BlogName" ColumnName="BlogName" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.Contact">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coupons">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.Coupon">
+              <MappingFragment StoreEntitySet="Coupons">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CouponName" ColumnName="CouponName" />
+                <ScalarProperty Name="CouponCode" ColumnName="CouponCode" />
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseComments">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.CourseComment">
+              <MappingFragment StoreEntitySet="CourseComments">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="OldPrice" ColumnName="OldPrice" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Examinations">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.Examination">
+              <MappingFragment StoreEntitySet="Examination">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ExaminationDate" ColumnName="ExaminationDate" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="ExamName" ColumnName="ExamName" />
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExaminationContents">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.ExaminationContent">
+              <MappingFragment StoreEntitySet="ExaminationContent">
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamResults">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.ExamResult">
+              <MappingFragment StoreEntitySet="ExamResults">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="ExamDate" ColumnName="ExamDate" />
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ResultID" ColumnName="ResultID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LectureComments">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.LectureComment">
+              <MappingFragment StoreEntitySet="LectureComments">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lectures">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.Lecture">
+              <MappingFragment StoreEntitySet="Lectures">
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Overview" ColumnName="Overview" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="LectureName" ColumnName="LectureName" />
+                <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="PaymentName" ColumnName="PaymentName" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="ChoiceD" ColumnName="ChoiceD" />
+                <ScalarProperty Name="ChoiceC" ColumnName="ChoiceC" />
+                <ScalarProperty Name="ChoiceB" ColumnName="ChoiceB" />
+                <ScalarProperty Name="ChoiceA" ColumnName="ChoiceA" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionTypes">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.QuestionType">
+              <MappingFragment StoreEntitySet="QuestionType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplyingBlogComments">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.ReplyingBlogComment">
+              <MappingFragment StoreEntitySet="ReplyingBlogComments">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ReplyID" ColumnName="ReplyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplyingCourseComments">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.ReplyingCourseComment">
+              <MappingFragment StoreEntitySet="ReplyingCourseComments">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ReplyID" ColumnName="ReplyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplyingLectureComments">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.ReplyingLectureComment">
+              <MappingFragment StoreEntitySet="ReplyingLectureComments">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ReplyID" ColumnName="ReplyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserStatus">
+            <EntityTypeMapping TypeName="TN_academic_DBModel.UserStatu">
+              <MappingFragment StoreEntitySet="UserStatus">
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

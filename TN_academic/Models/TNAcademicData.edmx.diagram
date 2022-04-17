@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c3cf81fc47fa4facad80216cc743f03b" Name="Diagram1">
+        <EntityTypeShape EntityType="TN_academic_DBModel.AboutU" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.BlogCategory" Width="1.5" PointX="6" PointY="7.375" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.BlogComment" Width="1.5" PointX="10.5" PointY="16.75" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.Blog" Width="1.5" PointX="8.25" PointY="16.5" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.Category" Width="1.5" PointX="3" PointY="22.125" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.Contact" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.Coupon" Width="1.5" PointX="3" PointY="10.625" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.CourseComment" Width="1.5" PointX="7.5" PointY="12.75" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.Cours" Width="1.5" PointX="5.25" PointY="15.875" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.Examination" Width="1.5" PointX="7.5" PointY="21.25" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.ExaminationContent" Width="1.5" PointX="9.75" PointY="21.625" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.ExamResult" Width="1.5" PointX="12.75" PointY="20.25" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.LectureComment" Width="1.5" PointX="12.75" PointY="24.125" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.Lecture" Width="1.5" PointX="7.5" PointY="25.125" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.OrderDetail" Width="1.5" PointX="7.5" PointY="10" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.Order" Width="1.5" PointX="5.25" PointY="11.5" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.Payment" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.Question" Width="1.5" PointX="12.5" PointY="12.25" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.QuestionType" Width="1.5" PointX="10.25" PointY="9.25" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.ReplyingBlogComment" Width="1.5" PointX="12.75" PointY="16.875" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.ReplyingCourseComment" Width="1.5" PointX="9.75" PointY="12.5" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.ReplyingLectureComment" Width="1.5" PointX="15" PointY="19.875" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.User" Width="1.5" PointX="3" PointY="15.375" />
+        <EntityTypeShape EntityType="TN_academic_DBModel.UserStatu" Width="1.5" PointX="0.75" PointY="17.25" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Blogs__CategoryI__31EC6D26" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__BlogComme__BlogI__35BCFE0A" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__BlogComme__Usern__34C8D9D1" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__ReplyingB__Comme__398D8EEE" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Blogs__Username__30F848ED" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Courses__Categor__4316F928" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Orders__CouponID__10566F31" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__CourseCom__Cours__46E78A0C" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__CourseCom__Usern__45F365D3" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__ReplyingC__Comme__4AB81AF0" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Courses__Usernam__4222D4EF" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Examinati__Cours__5CD6CB2B" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Lectures__Course__4D94879B" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__OrderDeta__Cours__14270015" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Questions__Cours__628FA481" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Examinati__ExamI__656C112C" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__ExamResul__ExamI__6A30C649" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Examinati__Quest__66603565" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__ExamResul__Usern__693CA210" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__LectureCo__Lectu__5165187F" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__LectureCo__Usern__5070F446" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__ReplyingL__Comme__5535A963" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__OrderDeta__Order__1332DBDC" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Orders__PaymentI__0F624AF8" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Orders__Username__0E6E26BF" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Questions__TypeI__619B8048" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__ReplyingB__Usern__38996AB5" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__ReplyingC__Usern__49C3F6B7" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__ReplyingL__Usern__5441852A" />
+        <AssociationConnector Association="TN_academic_DBModel.FK__Users__StatusID__7C4F7684" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

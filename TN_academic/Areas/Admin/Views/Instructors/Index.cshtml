@@ -1,0 +1,133 @@
+﻿@model IEnumerable<TN_academic.Models.User>
+
+@{
+    ViewBag.Title = "Manage Instructors";
+    ViewBag.Manage = "Manage Instructors";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string isChecked = "";
+}
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data of Instructors</h3>
+                <p>
+                    <a class="btn btn-success btn-sm float-right" href="~/Admin/Instructors/Create">
+                        <i class="fas fa-plus">
+                        </i>
+                        Create New
+                    </a>
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="tbl_Instructors" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Username)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LastName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DOB)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Gender)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Phone)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Avatar)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserStatu.StatusName)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Username)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @item.DOB.Value.ToShortDateString()
+                                </td>
+                                <td>
+                                    @if (item.Gender == true)
+                                    {
+                                        <div>Male</div>
+                                    }
+                                    else
+                                    {
+                                        <div>Female</div>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="tel: @item.Phone">@Html.DisplayFor(modelItem => item.Phone)</a>
+                                </td>
+                                <td>
+                                    <img src="@Url.Content(item.Avatar)" width="100" height="100" />
+                                </td>
+                                <td>
+                                    @{
+                                        if (item.StatusID == 1)
+                                        {
+                                            isChecked = "checked";
+                                        }
+                                        else
+                                        {
+                                            isChecked = "";
+                                        }
+                                    }
+                                    <input type="checkbox" data-id="@item.Username" data-on-text="active" data-off-text="block" id="chkStatus" name="my-checkbox" @isChecked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                </td>
+
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm btn-block" href="~/Admin/Instructors/Details/@item.Username">
+                                        <i class="fas fa-eye">
+                                        </i>
+                                        View
+                                    </a>
+                                    <a class="btn btn-info btn-sm btn-block" href="~/Admin/Instructors/Edit/@item.Username">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Edit
+                                    </a>
+                                    <a class="btn btn-danger btn-sm btn-block" href="~/Admin/Instructors/Delete/@item.Username">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section ScriptConfig
+{
+    @Styles.Render("~/asset/css/datatable")
+    @Scripts.Render("~/asset/scripts/datatable")
+    <script src="~/Asset/ajaxChangeSatus/user.js"></script>
+}

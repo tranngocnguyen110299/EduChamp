@@ -1,0 +1,404 @@
+﻿@model TN_academic.Areas.Admin.Models.UserModelForEdit
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner2.jpg";
+    ViewBag.BannerText = "Profile";
+}
+
+<div class="content-block">
+    <div class="section-area section-sp1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-12 m-b30">
+                    <div class="profile-bx text-center">
+                        <div class="user-profile-thumb">
+                            <img src="@Url.Content(Model.Avatar)" alt="" />
+                        </div>
+                        <div class="profile-info">
+                            <h4>@Model.FirstName @Model.LastName</h4>
+                            <span>@Model.Email</span>
+                        </div>
+                        <div class="profile-social">
+                            <ul class="list-inline m-a0">
+                                <li><a href="https://www.facebook.com/sharer/sharer.php?u="><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/intent/tweet?text="><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source="><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="https://plus.google.com/share?url="><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="profile-tabnav">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#quiz-results"><i class="ti-bookmark-alt"></i>Examination Results</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#edit-profile"><i class="ti-pencil-alt"></i>Edit Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#change-password"><i class="ti-lock"></i>Change Password</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-8 col-sm-12 m-b30">
+                    <div class="profile-content-bx">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="quiz-results">
+                                <div class="profile-head">
+                                    <h3>Quiz Results</h3>
+                                </div>
+                                <div class="courses-filter">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <table id="tbl_ExamResultDetail" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Examination Name
+                                                        </th>
+                                                        <th>
+                                                            Exam Date
+                                                        </th>
+                                                        <th>
+                                                            Result
+                                                        </th>
+                                                        <th>
+                                                            Mark
+                                                        </th>
+                                                        <th>
+                                                            Completed Time
+                                                        </th>
+                                                        <th>
+                                                            Status
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in (List<TN_academic.Models.ExamResult>)ViewBag.ResultList)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @item.Examination.ExamName
+                                                            </td>
+                                                            <td>
+                                                                @item.ExamDate
+                                                            </td>
+                                                            <td>
+                                                                @item.Result
+                                                            </td>
+                                                            <td>
+                                                                @item.Mark
+                                                            </td>
+                                                            <td>
+                                                                @item.Time
+                                                            </td>
+                                                            <td>
+                                                                @if (item.Status == 0)
+                                                                {
+                                                                    <span class="badge badge-danger">fail</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span class="badge badge-success">pass</span>
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="edit-profile">
+                                <div class="profile-head">
+                                    <h3>Edit Profile</h3>
+                                </div>
+                                <div class="">
+
+                                    @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <div class="edit-profile">
+                                            <div class="card-body">
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                @Html.HiddenFor(model => model.Username)
+
+                                                <div class="form-group row">
+                                                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-7">
+                                                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter First Name" } })
+                                                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-7">
+                                                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Last Name" } })
+                                                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-7">
+                                                        @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control oso", @type = "date" } })
+                                                        @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-7" style="width: 100%;">
+                                                        @Html.RadioButtonFor(model => model.Gender, true, new { Checked = "checked" })
+                                                        <span>Male</span>&emsp;&emsp;
+                                                        @Html.RadioButtonFor(model => model.Gender, false)
+                                                        <span>Female</span>
+                                                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-7">
+                                                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Phone Number" } })
+                                                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-7">
+                                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Email", @id = "txtEmail" } })
+                                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                        <div style="color:red" id="notice_invalid_email"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-7">
+                                                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Address" } })
+                                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-7">
+                                                        <div class="file-input">
+                                                            <input type="file" id="file" class="file" name="EditedImage">
+                                                            <label for="file" class="fName">
+                                                                Select your avatar
+                                                            </label>
+                                                        </div>
+                                                        @Html.ValidationMessageFor(model => model.EditedImage, "", new { @class = "text-danger" })
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="">
+                                                    <div class="">
+                                                        <div class="row">
+                                                            <div class="col-12 col-sm-3 col-md-3 col-lg-2">
+                                                            </div>
+                                                            <div class="col-12 col-sm-9 col-md-9 col-lg-7">
+                                                                <button type="submit" class="btn">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="change-password">
+                                <div class="profile-head">
+                                    <h3>Change Password</h3>
+                                </div>
+                                <form class="edit-profile" id="changePasswordForm">
+                                    <div class="">
+
+                                        <div class="form-group row">
+                                            <label class="col-12 col-sm-4 col-md-4 col-lg-3 col-form-label">Current Password</label>
+                                            <div class="col-12 col-sm-8 col-md-8 col-lg-7">
+                                                <input class="form-control" name="currentPass" id="currentPass" type="password" value="">
+                                                <div id="invalid_currentpass"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-12 col-sm-4 col-md-4 col-lg-3 col-form-label">New Password</label>
+                                            <div class="col-12 col-sm-8 col-md-8 col-lg-7">
+                                                <input class="form-control" name="newPass" id="newPass" type="password" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-12 col-sm-4 col-md-4 col-lg-3 col-form-label">Re Type New Password</label>
+                                            <div class="col-12 col-sm-8 col-md-8 col-lg-7">
+                                                <input class="form-control" name="confirmPass" id="confirmPass" type="password" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-4 col-md-4 col-lg-3">
+                                        </div>
+                                        <div class="col-12 col-sm-8 col-md-8 col-lg-7">
+                                            <a id="btnChangePass" class="changePassword btn">Save changes</a>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section ClientScript
+{
+    <style>
+        /*#ImageFile {
+            outline: 0;
+            border-width: 0 0 1px;
+        }*/
+
+        .file {
+            opacity: 0;
+            width: 0.1px;
+            height: 0.1px;
+            position: absolute;
+        }
+
+        .file-input label {
+            display: block;
+            position: relative;
+            width: 200px;
+            height: 50px;
+            border-radius: 25px;
+            background: linear-gradient(40deg, #ff6ec4, #7873f5);
+            box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform .2s ease-out;
+        }
+
+        input:hover + label,
+        input:focus + label {
+            transform: scale(1.02);
+        }
+
+        input:focus + label {
+            outline: 1px solid #000;
+            outline: -webkit-focus-ring-color auto 2px;
+        }
+
+        .file-name {
+            position: absolute;
+            bottom: -35px;
+            left: 10px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+    </style>
+    @Styles.Render("~/asset/css/form")
+    @Scripts.Render("~/asset/scripts/form")
+    <script src="~/Asset/plugins/jquery-validation/jquery.validate.min.js"></script>
+    @Styles.Render("~/asset/css/datatable")
+    @Scripts.Render("~/asset/scripts/datatable")
+
+    <script>
+        $(function () {
+            
+
+            $('.changePassword').off('click').on('click', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    data: { currentpass: JSON.stringify($("#currentPass").val()), newpass: JSON.stringify($("#newPass").val()) },
+                    url: '/Profile/ChangePassword',
+                    dataType: 'json',
+                    type: 'POST',
+                    success: function (res) {
+                        if (res.status == false) {
+                            $('#invalid_currentpass').empty().append('<div class="text-danger">The current password is incorrect. Try again, please!</div>');
+                            $("#currentPass").val("");
+                            $("#newPass").val("");
+                            $("#confirmPass").val("");
+                            $('#notice_success').empty();
+                        }
+                        if (res.status == true) {
+                            toastr.success('Successfully saved!');
+                            $("#currentPass").val("");
+                            $("#newPass").val("");
+                            $("#confirmPass").val("");
+                            $('#invalid_currentpass').empty();
+                        }
+                    }
+                })
+            });
+
+
+            $('#changePasswordForm').validate({
+                rules: {
+                    currentPass: {
+                        required: true
+                    },
+                    newPass: {
+                        required: true,
+                        minlength: 8,
+                        maxlength: 255
+                    },
+                    confirmPass: {
+                        required: true,
+                        equalTo: "#newPass"
+                    }
+
+                },
+                messages: {
+                    currentPass: {
+                        required: "Please enter your current password."
+                    },
+                    newPass: {
+                        required: "Please enter your new password",
+                        minlength: "The new password must be between 8 and 255 characters long.",
+                        maxlength: "The new password must be between 8 and 255 characters long."
+                    },
+                    confirmPass: {
+                        required: "Please confirm your new password.",
+                        equalTo: "The confirm password is incorrect."
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+
+            
+
+        });
+    </script>
+
+
+
+}

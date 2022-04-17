@@ -1,0 +1,181 @@
+﻿@model PagedList.IPagedList<TN_academic.Models.LectureComment>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Learn";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+    var lecture = (TN_academic.Models.Lecture)ViewBag.Lecture;
+
+}
+
+@Html.Partial("_Header_db")
+@Html.Partial("_LectureNavigation")
+
+<main class="ttr-wrapper">
+    <div class="container-fluid">
+
+        <div class="db-breadcrumb">
+            <h4 class="breadcrumb-title">Learn</h4>
+            <ul class="db-breadcrumb-list">
+                <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="@Url.Action("MyCourses", "Courses")">My Courses</a></li>
+                <li>@lecture.Cours.CourseName</li>
+                <li>@lecture.LectureName</li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 m-b30">
+                <div class="widget-box">
+                    <div class="wc-title">
+                        <h4>@lecture.LectureName</h4>
+                    </div>
+                    <div class="widget-inner">
+                        <video controls class="lecture-video" preload="none">
+                            <source src="@Url.Content(lecture.Path)" type="video/mp4">
+                            <source src="@Url.Content(lecture.Path)" type="video/ogg">
+                            <source src="@Url.Content(lecture.Path)" type="video/webm">
+                            <source src="@Url.Content(lecture.Path)" type="video/flv">
+                            <source src="@Url.Content(lecture.Path)" type="video/mov">
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 m-b30">
+                <div class="widget-box">
+                    <div class="widget-inner">
+                        <div class="card-courses-list admin-review">
+                            <div class="card-courses-full-dec">
+                                <div class="card-courses-title">
+                                    <h4>@lecture.LectureName</h4>
+                                </div>
+                                <div class="card-courses-list-bx">
+                                    <ul class="card-courses-view">
+                                        <li class="card-courses-user">
+                                            <div class="card-courses-user-pic">
+                                                <img src="@Url.Content(lecture.Cours.User.Avatar)" alt="" />
+                                            </div>
+                                            <div class="card-courses-user-info">
+                                                <h5>Instructor</h5>
+                                                <h4>@lecture.Cours.User.FirstName @lecture.Cours.User.LastName</h4>
+                                            </div>
+                                        </li>
+                                        <li class="card-courses-review">
+                                            <h5>@lecture.LectureComments.Count Review</h5>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="row card-courses-dec">
+                                    <div class="col-md-12">
+                                        <h6 class="m-b10">Overview of the lecture</h6>
+                                        <p>@Html.Raw(lecture.Overview)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 m-b30">
+                <div class="widget-box">
+                    <div class="widget-inner">
+                        <div class="card-courses-list admin-review">
+                            <div class="card-courses-full-dec">
+                                @{
+                                    if (Model.Count > 1)
+                                    {
+                                        <label style="padding-bottom: 4%">@Model.Count Comments</label>
+                                    }
+                                    else
+                                    {
+                                        <label style="padding-bottom: 4%">@Model.Count Comment</label>
+                                    }
+                                }
+
+
+
+                                @foreach (var item in Model)
+                                {
+                                    <div class="card-courses-list-bx">
+                                        <ul class="card-courses-view">
+                                            <li class="card-courses-user">
+                                                <div class="card-courses-user-pic">
+                                                    <img src="@Url.Content(item.User.Avatar)" alt="" />
+                                                </div>
+                                                <div class="card-courses-user-info">
+                                                    <h4>@item.User.FirstName @item.User.LastName</h4>
+                                                    <h5>@item.CreatedDate</h5>
+                                                </div>
+                                            </li>
+                                            <li class="row card-courses-dec">
+                                                <p>@Html.Raw(item.Content)</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                    foreach (var reply in item.ReplyingLectureComments)
+                                    {
+                                        <div style="padding-left: 20%" class="card-courses-list-bx">
+                                            <ul class="card-courses-view">
+                                                <li class="card-courses-user">
+                                                    <div class="card-courses-user-pic">
+                                                        <img src="@Url.Content(reply.User.Avatar)" alt="" />
+                                                    </div>
+                                                    <div class="card-courses-user-info">
+                                                        <h4>@reply.User.FirstName @reply.User.LastName</h4>
+                                                        <h5>@reply.CreatedDate</h5>
+                                                    </div>
+                                                </li>
+                                                <li class="row card-courses-dec">
+                                                    <p>@Html.Raw(reply.Content)</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    }
+
+                                }
+                                <div id="apdComment"></div>
+                            </div>
+                        </div>
+                        <div>
+                            @Html.PagedListPager(Model, page => Url.Action("Learn",
+                            new { course = lecture.CourseID, lecture = lecture.LectureID, page }))
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-12 m-b30">
+                <div class="widget-box">
+                    <div class="email-wrapper">
+                        <div class="mail-list-container">
+                            <form id="commentForm">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>Comment</label>
+                                        <input class="form-control" name="txtComment" id="txtComment" placeholder="Please feel free to ask your instructor anything">
+                                        <input type="hidden" name="hdLecture" id="hdLecture" value="@lecture.LectureID" />
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" id="btnComment" class="btn btn-primary">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</main>
+<div class="ttr-overlay"></div>
+@section ClientScript{
+    <script src="~/Asset/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/Content/jsControllers/jsCourses.js"></script>
+}

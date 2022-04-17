@@ -1,0 +1,139 @@
+﻿@model TN_academic.Areas.Admin.Models.CourseModelForCreate
+
+@{
+    ViewBag.Title = "Create Course";
+    ViewBag.Function = "Courses";
+    ViewBag.ChildFunction = "Create Course";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var selectListStatus = (SelectList)ViewBag.StatusList;
+}
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-green">
+                    <div class="card-header">
+                        <h3 class="card-title">New Course</h3>
+                    </div>
+                    @using (Html.BeginForm("Create", "Courses", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            <div class="card-body">
+                                <div style="color:red;font-size:20px;font-weight:bold">@ViewBag.Error</div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Course Name" } })
+                                        @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 control-label">Instructor</label>
+                                    <div class="col-md-10">
+                                        @Html.DropDownList("Username", null, "Select instructor", htmlAttributes: new { @class = "form-control select2", @style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2 control-label">Category</label>
+                                    <div class="col-md-10">
+                                        @Html.DropDownList("CategoryID", null, "Select category", htmlAttributes: new { @class = "form-control select2", @style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.OldPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.OldPrice, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = "Enter Old Price" } })
+                                        @Html.ValidationMessageFor(model => model.OldPrice, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = "Enter Price" } })
+                                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Short Description" } })
+                                        @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextAreaFor(model => model.Description, new { @id = "summernote_Description" })
+                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = "Enter Quantity Of The Course" } })
+                                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Thumbnail, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" accept="image/*" name="ImageFile" id="ImageFile">
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                            @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.DropDownListFor(model => model.Status, selectListStatus, "Select status", htmlAttributes: new { @class = "form-control select2", @style = "width: 100%;" })
+                                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Create</button>
+                                <a class="btn btn-default float-right" href="~/Admin/Courses/Index">Cancel</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section ScriptConfig
+{
+    @Styles.Render("~/asset/css/form")
+    @Scripts.Render("~/asset/scripts/form")
+    @Styles.Render("~/asset/css/select2")
+    @Scripts.Render("~/asset/scripts/select2")
+   
+    <script>
+        $(function () {
+            $('#summernote_Description').summernote()
+            $('.select2').select2()
+        })
+
+    </script>
+}

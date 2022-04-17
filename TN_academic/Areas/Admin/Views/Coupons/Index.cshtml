@@ -1,0 +1,113 @@
+﻿@model IEnumerable<TN_academic.Models.Coupon>
+
+@{
+    ViewBag.Title = "Manage Coupons";
+    ViewBag.Manage = "Manage Coupon";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string isChecked = "";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data of Coupons</h3>
+                <p>
+                    <a class="btn btn-success btn-sm float-right" href="~/Admin/Coupons/Create">
+                        <i class="fas fa-plus">
+                        </i>
+                        Create New
+                    </a>
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="tbl_Coupons" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CouponCode)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CouponName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Thumbnail)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Rate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Quantity)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CouponCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CouponName)
+                                </td>
+                                <td>
+                                    <img src="@Url.Content(item.Thumbnail)" width="100" height="100" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Rate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @if (item.Status == true)
+                                    {
+                                        isChecked = "checked";
+                                    }
+                                    else
+                                    {
+                                        isChecked = "";
+                                    }
+                                    <input type="checkbox" data-id="@item.CouponID" data-on-text="effective" data-off-text="expire" id="chkStatus" name="my-checkbox" @isChecked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                </td>
+
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm" href="@Url.Action("Details", "Coupons", new { id = item.CouponID })">
+                                        <i class="fas fa-eye">
+                                        </i>
+                                        View
+                                    </a>
+                                    <a class="btn btn-info btn-sm" href="@Url.Action("Edit", "Coupons", new { id = item.CouponID })">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Edit
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "Coupons", new { id = item.CouponID })">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section ScriptConfig
+{
+    @Styles.Render("~/asset/css/datatable")
+    @Scripts.Render("~/asset/scripts/datatable")
+    <script src="~/Asset/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="~/Asset/ajaxChangeSatus/coupons.js"></script>
+}
+
+

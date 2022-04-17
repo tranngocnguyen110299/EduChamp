@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- META ============================================= -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="" />
+
+    <!-- DESCRIPTION -->
+    <meta name="description" content="EduChamp" />
+
+    <!-- OG -->
+    <meta property="og:title" content="EduChamp: @ViewBag.Title" />
+    <meta property="og:description" content="EduChamp: Education Support Website" />
+    <meta property="og:image" content="" />
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON ============================================= -->
+    <link rel="icon" href="~/Content/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/assets/images/favicon.png" />
+    <link rel="stylesheet" href="~/Asset/plugins/toastr/toastr.min.css">
+
+
+    <!-- PAGE TITLE HERE ============================================= -->
+    <title>EduChamp - @ViewBag.Title </title>
+
+    <!-- MOBILE SPECIFIC ============================================= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- All PLUGINS CSS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/assets.css">
+
+    <!-- TYPOGRAPHY ============================================= -->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/typography.css">
+
+    <!-- SHORTCODES ============================================= -->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/shortcodes/shortcodes.css">
+
+    <!-- STYLESHEETS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/style.css">
+    <link class="skin" rel="stylesheet" type="text/css" href="~/Content/assets/css/color/color-1.css">
+
+</head>
+<body id="bg">
+    <div class="page-wraper">
+        <div id="loading-icon-bx"></div>
+        <header class="header rs-nav">
+            @{ Html.RenderAction("_Header", "Home"); }
+        </header>
+
+        <div class="page-content bg-white">
+            @Html.Partial("_Breadcrumb")
+            @RenderBody()
+        </div>
+
+        @{Html.RenderAction("_Footer", "Home");}
+
+        <button class="back-to-top fa fa-chevron-up"></button>
+    </div>
+    <!-- External JavaScripts -->
+    <script src="~/Content/assets/js/jquery.min.js"></script>
+    <script src="~/Content/assets/vendors/bootstrap/js/popper.min.js"></script>
+    <script src="~/Content/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="~/Content/assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+    <script src="~/Content/assets/vendors/magnific-popup/magnific-popup.js"></script>
+    <script src="~/Content/assets/vendors/counter/waypoints-min.js"></script>
+    <script src="~/Content/assets/vendors/counter/counterup.min.js"></script>
+    <script src="~/Content/assets/vendors/imagesloaded/imagesloaded.js"></script>
+    <script src="~/Content/assets/vendors/masonry/masonry.js"></script>
+    <script src="~/Content/assets/vendors/masonry/filter.js"></script>
+    <script src="~/Content/assets/vendors/owl-carousel/owl.carousel.js"></script>
+    <script src="~/Content/assets/js/functions.js"></script>
+    <script src="~/Content/assets/js/contact.js"></script>
+    <script src="~/Content/assets/vendors/switcher/switcher.js"></script>
+    <script src="~/Asset/plugins/toastr/toastr.min.js"></script>
+    <script>
+        $('#slMenu').on('change', function (e) {
+            var optionSelected = $("option", this);
+            window.location.href = this.value;
+        });
+    </script>
+
+    @Html.Partial("SweetAlertClient")
+
+    @RenderSection("ClientScript", false)
+
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+﻿@model PagedList.IPagedList<TN_academic.Models.CourseComment>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner3.jpg";
+    ViewBag.BannerText = "Courses";
+    var detail = (TN_academic.Models.Cours)ViewBag.Course;
+}
+
+<div class="content-block">
+    <div class="section-area section-sp1">
+        <div class="container">
+            <div class="row d-flex flex-row-reverse">
+                <div class="col-lg-3 col-md-4 col-sm-12 m-b30">
+                    <div class="course-detail-bx">
+                        <div class="course-price">
+                            <del>@string.Format("{0:N0}", (decimal)detail.OldPrice) ₫</del>
+                            <h4 class="price">@string.Format("{0:N0}", (decimal)detail.Price)₫</h4>
+                        </div>
+                        <div class="course-buy-now text-center">
+                            <a href="~/Cart/addItem?id=@detail.CourseID" class="btn radius-xl text-uppercase">Buy Now This Courses</a>
+                        </div>
+                        <div class="teacher-bx">
+                            <div class="teacher-info">
+                                <div class="teacher-thumb">
+                                    <img src="@Url.Content(detail.User.Avatar)" alt="" />
+                                </div>
+                                <div class="teacher-name">
+                                    <h5>@detail.User.FirstName @detail.User.LastName</h5>
+                                    <span>Instructor</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cours-more-info">
+                            <div class="review">
+                                <span>@detail.CourseComments.Count Review</span>
+                                <ul class="cours-star">
+                                    <li class="active"><i class="fa fa-star"></i></li>
+                                    <li class="active"><i class="fa fa-star"></i></li>
+                                    <li class="active"><i class="fa fa-star"></i></li>
+                                    <li class="active"><i class="fa fa-star"></i></li>
+                                    <li class="active"><i class="fa fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <div class="price categories">
+                                <span>Categories</span>
+                                <h5 class="text-primary">@detail.Category.CategoryName</h5>
+                            </div>
+                        </div>
+                        <div class="course-info-list scroll-page">
+                            <ul class="navbar">
+                                <li><a class="nav-link" href="#overview"><i class="ti-zip"></i>Overview</a></li>
+                                <li><a class="nav-link" href="#lecture"><i class="ti-bookmark-alt"></i>Lectures</a></li>
+                                <li><a class="nav-link" href="#instructor"><i class="ti-user"></i>Instructor</a></li>
+                                <li><a class="nav-link" href="#reviews"><i class="ti-comments"></i>Reviews</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9 col-md-8 col-sm-12">
+                    <div class="courses-post">
+                        <div class="ttr-post-media media-effect">
+                            <a href="javascript:;"><img src="@Url.Content(detail.Thumbnail)" alt=""></a>
+                        </div>
+                        <div class="ttr-post-info">
+                            <div class="ttr-post-title ">
+                                <h2 class="post-title">@detail.CourseName</h2>
+                            </div>
+                            <div class="ttr-post-text">
+                                <p>@detail.ShortDescription</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="courese-overview" id="overview">
+                        <h4>Overview</h4>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-4">
+                                <ul class="course-features">
+                                    <li><i class="ti-book"></i> <span class="label">Lectures</span> <span class="value">@detail.Lectures.Count</span></li>
+                                    <li><i class="ti-help-alt"></i> <span class="label">Quizzes</span> <span class="value">@detail.Examinations.Count</span></li>
+                                    <li><i class="ti-time"></i> <span class="label">Duration</span> <span class="value">60 hours</span></li>
+                                    <li><i class="ti-stats-up"></i> <span class="label">Skill level</span> <span class="value">Beginner</span></li>
+                                    <li><i class="ti-user"></i> <span class="label">Students</span> <span class="value">@detail.OrderDetails.Count</span></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-12 col-lg-8">
+                                <h5 class="m-b5">Course Description</h5>
+                                <p>@Html.Raw(detail.Description)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-b30" id="lecture">
+                        <h4>Lecture</h4>
+                        <ul class="curriculum-list">
+                            <li>
+                                <ul>
+                                    @foreach (var item in detail.Lectures)
+                                    {
+                                        <li>
+                                            <div class="curriculum-list-box">
+                                                <span>@item.LectureName</span>
+                                            </div>
+                                            <span>120 minutes</span>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="" id="instructor">
+                        <h4>Instructor</h4>
+                        <div class="instructor-bx">
+                            <div class="instructor-author">
+                                <img src="@Url.Content(detail.User.Avatar)" alt="">
+                            </div>
+                            <div class="instructor-info">
+                                <h6>@detail.User.FirstName @detail.User.LastName </h6>
+                                <span>Instructor</span>
+                                <ul class="list-inline m-tb10">
+                                    <li><a href="https://www.facebook.com/sharer/sharer.php?u=" class="btn sharp-sm facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://twitter.com/intent/tweet?text=" class="btn sharp-sm twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" class="btn sharp-sm linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="https://plus.google.com/share?url=" class="btn sharp-sm google-plus"><i class="fa fa-google-plus"></i></a></li>
+                                </ul>
+                                <p class="m-b0"><span>Phone: </span>@detail.User.Phone</p>
+                                <p class="m-b0"><span>Email: </span>@detail.User.Email</p>
+                                <p class="m-b0"><span>Address: </span>@detail.User.Address</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="reviews">
+                        <h4>Reviews</h4>
+                        <div class="review-bx">
+                            <div class="clear" id="comment-list">
+                                <div class="comments-area" id="comments">
+                                    <h2 class="comments-title">@detail.CourseComments.Count Comments</h2>
+                                    <div class="clearfix m-b20">
+                                        <ol class="comment-list">
+                                            @foreach (var item in Model)
+                                            {
+                                                <li class="comment">
+                                                    <div class="comment-body">
+                                                        <div class="comment-author vcard"> <img class="avatar photo" src="@Url.Content(item.User.Avatar)" alt=""> <cite class="fn">@item.User.FirstName @item.User.LastName</cite> <span class="says">says:</span> </div>
+                                                        <div class="comment-meta"> <a href="javascript:;">@item.CreatedDate</a> </div>
+                                                        <p>
+                                                            @Html.Raw(item.Content)
+                                                        </p>
+                                                        <div class="reply" onclick="myFunction(@item.CommentID, @detail.CourseID)"><a style="cursor:pointer" class="comment-reply-link">Reply</a></div>
+                                                        <div id="myReply_@item.CommentID"></div>
+                                                    </div>
+
+                                                    <ol class="children">
+                                                        <li class="comment odd parent">
+                                                            @foreach (var i in item.ReplyingCourseComments)
+                                                            {
+                                                                if (i.Status == 1) { 
+                                                                    <div class="comment-body">
+                                                                        <div class="comment-author vcard"> <img class="avatar photo" src="@Url.Content(i.User.Avatar)" alt=""> <cite class="fn">@i.User.FirstName @i.User.LastName</cite> <span class="says">says:</span> </div>
+                                                                        <div class="comment-meta"> <a href="#">@i.CreatedDate</a> </div>
+                                                                        <p>
+                                                                            @Html.Raw(i.Content)
+                                                                        </p>
+                                                                    </div>
+                                                                }    
+                                                            }
+                                                        </li>
+                                                    </ol>
+                                                </li>
+
+                                            }
+                                        </ol>
+                                        <div class="pagination-bx rounded-sm gray clearfix">
+                                            @Html.PagedListPager(Model, page => Url.Action("Details",
+                                            new { id = detail.CourseID, page }))
+                                        </div>
+                                        <br/>
+                                        <div class="comment-respond" id="respond">
+                                            <h4 class="comment-reply-title" id="reply-title">Leave a Reply <small> <a style="display:none;" href="#" id="cancel-comment-reply-link" rel="nofollow">Cancel reply</a> </small> </h4>
+                                            @using (Html.BeginForm("Comment", "Courses", FormMethod.Post, new { @class = "comment-form", @id = "commentform", enctype = "multipart/form-data" }))
+                                            {
+                                                <p class="comment-form-comment">
+                                                    <label for="comment">Comment</label>
+                                                    <textarea rows="8" name="comment" id="summernote"></textarea>
+                                                    @Html.Hidden("courseID", detail.CourseID)
+                                                </p>
+                                                <p class="form-submit">
+                                                    <input type="submit" value="Submit Comment" class="submit" id="submit" name="submit">
+                                                </p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ClientScript
+{
+    <script src="~/Asset/plugins/summernote/summernote-bs4.min.js"></script>
+    <link href="~/Asset/plugins/summernote/summernote-bs4.min.css" rel="stylesheet" />
+
+    <script>
+        function myFunction(id, courseID) {
+            document.getElementById("myReply_" + id).innerHTML = '<form class="comment-form" id="commentform" action="/Courses/Reply" method="post"><p class="comment-form-comment"><input type="text" value="" id="content" name="content" placeholder="Reply comment" ></p><input type="hidden" id="commentID" name="commentID" value="' + id + '"><input type="hidden" id="courseID" name="courseID" value="' + courseID + '"><p class="form-submit"><input type="submit" value="Reply" class="submit" id="submit" name="submit"></p></form><br/>';
+        }
+
+        $(function () {
+            $('#summernote').summernote()
+
+        })
+    </script>
+
+
+}
+

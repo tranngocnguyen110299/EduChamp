@@ -1,0 +1,206 @@
+﻿@model TN_academic.ViewModels.ClientBlogModelForEdit
+@{
+    ViewBag.Title = "Edit Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner2.jpg";
+    ViewBag.BannerText = "Edit Blog";
+}
+
+<div class="content-block">
+    <div class="section-area section-sp1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 m-b30">
+                    <div class="profile-content-bx">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="edit-profile">
+                                <div class="profile-head">
+                                    <h3>Edit blog</h3>
+                                </div>
+                                <div class="">
+
+                                    @using (Html.BeginForm("Edit", "Blogs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(model => model.BlogID);
+                                        <div class="form-horizontal">
+                                            <div class="card-body">
+                                                <div style="color:red;font-size:20px;font-weight:bold">@ViewBag.Error</div>
+                                                <div class="form-group row">
+                                                    @Html.LabelFor(model => model.BlogName, htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-10">
+                                                        @Html.EditorFor(model => model.BlogName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Blog Name" } })
+                                                        @Html.ValidationMessageFor(model => model.BlogName, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-10">
+                                                        @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Short Description" } })
+                                                        @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-10">
+                                                        @Html.TextAreaFor(model => model.Content, new { @id = "summernote" })
+                                                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    @Html.Label("Category", htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-10">
+                                                        @Html.DropDownList("CategoryID", (SelectList)ViewBag.BlogCategories, htmlAttributes: new { @class = "form-control select2", @style = "width: 100%;" })
+                                                        @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    @Html.Label("Thumbnail", htmlAttributes: new { @class = "col-12 col-sm-3 col-md-3 col-lg-2 col-form-label" })
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-10">
+                                                        <div class="file-input">
+                                                            <input type="file" id="file" class="file" name="ImageFile">
+                                                            <label for="file" class="fName">
+                                                                Select a thumbnail
+                                                            </label>
+                                                            @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-3 col-md-3 col-lg-2">
+                                                    </div>
+                                                    <div class="col-12 col-sm-9 col-md-9 col-lg-10">
+                                                        <button class="btn" type="submit">Send to administrator</button>
+                                                        <a class="btn" href="~/Blogs/Create" >Back</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section ClientScript
+{
+    @Styles.Render("~/asset/css/datatable")
+    @Scripts.Render("~/asset/scripts/datatable")
+    <style>
+        /*#ImageFile {
+            outline: 0;
+            border-width: 0 0 1px;
+        }*/
+
+        .file {
+            opacity: 0;
+            width: 0.1px;
+            height: 0.1px;
+            position: absolute;
+        }
+
+        .file-input label {
+            display: block;
+            position: relative;
+            width: 200px;
+            height: 50px;
+            border-radius: 25px;
+            background: linear-gradient(40deg, #ff6ec4, #7873f5);
+            box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform .2s ease-out;
+        }
+
+        input:hover + label,
+        input:focus + label {
+            transform: scale(1.02);
+        }
+
+        input:focus + label {
+            outline: 1px solid #000;
+            outline: -webkit-focus-ring-color auto 2px;
+        }
+
+        .file-name {
+            position: absolute;
+            bottom: -35px;
+            left: 10px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+    </style>
+    @Styles.Render("~/asset/css/form")
+    @Scripts.Render("~/asset/scripts/form")
+    <script>
+        $(function () {
+            $('#summernote').summernote()
+
+        })
+
+        $("#tbl_ClientBlog").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+            "dom": '<"pull-left"B><"pull-right"f>rt<"row"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
+            "buttons": [
+                {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    },
+                    className: 'btn btn-success btn-sm'
+                },
+                {
+                    extend: 'pdf',
+                    text: '<i class="fas fa-file-pdf"></i> PDF',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    },
+                    className: 'btn btn-danger btn-sm'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fas fa-print"></i> Print',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    },
+                    className: 'btn btn-info btn-sm'
+                }
+            ],
+            "aoColumns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ]
+        });
+
+    </script>
+
+
+
+}
+
+

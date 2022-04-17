@@ -1,0 +1,139 @@
+﻿@model IEnumerable<TN_academic.Models.Cours>
+@{
+    ViewBag.Title = "Manage Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner2.jpg";
+    ViewBag.BannerText = "Manage Courses";
+    string isChecked = "";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data of Courses</h3>
+                <p>
+                    <a class="btn btn-success btn-sm float-right" href="@Url.Action("Create", "Lectures")">
+                        <i class="fas fa-plus">
+                        </i>
+                        Create New
+                    </a>
+                </p>
+            </div>
+            <div class="card-body">
+                <table id="tbl_Course" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CourseName)
+                            </th>
+                            <th>
+                                Instructor
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Category.CategoryName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Price)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Quantity)
+                            </th>
+                            <th>
+                                Members
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Thumbnail)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CourseName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                                </td>
+                                <td>
+                                    @string.Format("{0:N0}", (decimal)item.Price)₫
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderDetails.Count)
+                                </td>
+                                <td>
+                                    <img src="@Url.Content(item.Thumbnail)" width="100" height="100" />
+                                </td>
+                                <td>
+                                    @if (item.Status == 1)
+                                    {
+                                        isChecked = "checked='checked'";
+                                    }
+                                    else
+                                    {
+                                        isChecked = "";
+                                    }
+                                    <div class="checkbox checbox-switch switch-primary">
+                                        <label>
+                                            <input type="checkbox" data-id="@item.CourseID" id="chkStatus" name="chkStatus" @isChecked />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </td>
+
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm btn-block" href="~/Lectures/Details/@item.CourseID">
+                                        <i class="fas fa-eye">
+                                        </i>
+                                        View
+                                    </a>
+                                    <a class="btn btn-info btn-sm btn-block" href="~/Lectures/Edit/@item.CourseID">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Edit
+                                    </a>
+                                </td>
+                                <td class="project-actions text-right">
+
+                                    <a class="btn btn-danger btn-sm btn-block" href="~/Lectures/Approve/@item.CourseID">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Approve
+                                    </a>
+                                    <a class="btn btn-success btn-sm btn-block" href="~/Lectures/AddLecture/@item.CourseID">
+                                        <i class="fas fa-book">
+                                        </i>
+                                        Lecture
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section ClientScript
+{
+    <link href="~/Content/switch.css" rel="stylesheet" />
+    @Styles.Render("~/asset/css/datatable")
+    @Scripts.Render("~/asset/scripts/datatable")
+    <script src="~/Content/jsControllers/jsChangeStatusCourses.js"></script>
+}
+

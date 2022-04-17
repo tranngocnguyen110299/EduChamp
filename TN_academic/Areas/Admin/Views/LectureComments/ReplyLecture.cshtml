@@ -1,0 +1,69 @@
+﻿@model TN_academic.Models.ReplyingLectureComment
+
+@{
+    ViewBag.Title = "Reply Lecture Comment";
+    ViewBag.Function = "LectureComments";
+    ViewBag.ChildFunction = "Reply Lecture Comment";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var list = (List<TN_academic.Models.ReplyingLectureComment>)ViewBag.ReplyList;
+    var comment = (TN_academic.Models.LectureComment)ViewBag.LectureComment;
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" >
+                <div class="card direct-chat direct-chat-warning">
+                    <div class="card-header">
+                        <h3 class="card-title">Reply Comment</h3>
+                    </div>
+                    <div class="card-body" >
+                        <div class="direct-chat-messages"  style="height: 100%; width: 100%">
+
+                            <div class="direct-chat-msg right">
+                                <div class="direct-chat-infos clearfix">
+                                    <span class="direct-chat-name float-right">@comment.User.FirstName @comment.User.LastName</span>
+                                    <span class="direct-chat-timestamp float-left">@comment.CreatedDate</span>
+                                </div>
+                                <img class="direct-chat-img" src="@Url.Content(comment.User.Avatar)" alt="message user image">
+                                <div class="direct-chat-text">
+                                    @Html.Raw(comment.Content)
+                                </div>
+                            </div>
+
+                            @foreach (var item in list)
+                            {
+                                <div class="direct-chat-msg">
+                                    <div class="direct-chat-infos clearfix">
+                                        <span class="direct-chat-name float-left">@item.User.FirstName @item.User.LastName</span>
+                                        <span class="direct-chat-timestamp float-right">@item.CreatedDate</span>
+                                    </div>
+
+                                    <img class="direct-chat-img" src="@Url.Content(item.User.Avatar)" alt="message user image">
+
+                                    <div class="direct-chat-text">
+                                        @Html.Raw(item.Content)<div class="float-right"><a href="~/Admin/LectureComments/DeleteReply/@item.ReplyID" class="btn btn-sm"><i class="fas fa-trash"></i></a></div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        @using (Html.BeginForm("Reply", "LectureComments", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="input-group">
+                                @Html.Hidden("CommentID", comment.CommentID)
+                                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control", @placeholder = "Type Message ...", @required = "required" } })
+                                <span class="input-group-append">
+                                    <button type="submit" class="btn btn-warning">Send</button>
+                                </span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

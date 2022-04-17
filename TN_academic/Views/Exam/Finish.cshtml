@@ -1,0 +1,91 @@
+﻿@model TN_academic.Models.ExamResult
+@{
+    ViewBag.Title = "Finish";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+    var examInfo = (TN_academic.Models.Examination)ViewBag.ExamInformation;
+}
+
+@Html.Partial("_Header_db")
+
+<main class="col-lg-12">
+    <div class="container-fluid">
+        <div class="db-breadcrumb">
+            <h4 class="breadcrumb-title">Finish</h4>
+            <ul class="db-breadcrumb-list">
+                <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="@Url.Action("MyCourses", "Courses")">Finish Examination</a></li>
+                <li>Examination</li>
+            </ul>
+        </div>
+        <div class="col-lg-12 m-b30">
+            <div class="widget-box">
+                <div class="email-wrapper">
+                    <div class="mail-list-container">
+                        <div class="card-body">
+                            <div class="card-courses-list bookmarks-bx">
+                                <div class="card-courses-full-dec">
+                                    <div class="card-courses-title">
+                                        <h2 class="m-b5">@examInfo.ExamName</h2>
+                                    </div>
+                                    <div class="card-courses-list-bx">
+                                        <ul class="card-courses-view">
+                                            <li class="card-courses-review">
+                                                <h5>Course</h5>
+                                                <h4>@examInfo.Cours.CourseName</h4>
+                                            </li>
+                                            <li class="card-courses-review">
+                                                <h5>Examination Date</h5>
+                                                <h4>@examInfo.ExaminationDate.Value</h4>
+                                            </li>
+                                            <li class="card-courses-review">
+                                                <h5>Time</h5>
+                                                <h4>@Model.Time</h4>
+                                            </li>
+                                            <li class="card-courses-review">
+                                                <h5>Questions</h5>
+                                                <h4>@examInfo.ExaminationContents.Count questions</h4>
+                                            </li>
+                                        </ul>
+                                        <ul class="card-courses-view">
+                                            <li class="card-courses-review">
+                                                <h5>Student</h5>
+                                                <h4>@ViewBag.StudentName</h4>
+                                            </li>
+                                            <li class="card-courses-review">
+                                                <h5>Result</h5>
+                                                <h4>@Html.DisplayFor(model => model.Result)</h4>
+                                            </li>
+                                            <li class="card-courses-review">
+                                                <h5>Mark</h5>
+                                                <h4>@Html.DisplayFor(model => model.Mark) marks</h4>
+                                            </li>
+                                            <li class="card-courses-review">
+                                                <h5>State</h5>
+                                                @if (Model.Status == 1)
+                                                {
+                                                    <h4>PASS</h4>
+                                                }
+                                                else
+                                                {
+                                                    <h4>FAIL</h4>
+                                                }
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="row card-courses-dec">
+
+                                        <div class="col-md-12">
+                                            <a href="@Url.Action("MyCourses", "Courses")" class="btn radius-xl">Go Back</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="ttr-overlay"></div>
+

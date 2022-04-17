@@ -1,0 +1,77 @@
+﻿@model TN_academic.Areas.Admin.Models.UserLoginModel
+
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Asset/login/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="~/Asset/login/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Asset/login/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Asset/login/css/style.css">
+    <style>
+        .notice {
+            color: red;
+            font-size: 12px;
+            padding-bottom: 12px;
+        }
+    </style>
+
+    <title>EduChamp - Login</title>
+</head>
+<body>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/Asset/login/images/undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="mb-4">
+                                <h3>Sign In</h3>
+                                <p class="mb-4">Please login to continue</p>
+                            </div>
+
+                            @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+                            {
+                                <div class="form-group first">
+                                    @Html.LabelFor(model => model.Username)
+                                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @id = "username" } })
+                                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "notice" })
+                                </div>
+                                <div class="form-group last mb-4">
+                                    @Html.LabelFor(model => model.Password)
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @type = "password", @class = "form-control", @id = "password", @Value="" } })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "notice" })
+                                </div>
+                                <div class="notice">@ViewBag.ErrorLogin</div>
+                                
+
+                                <input type="submit" value="Log In" class="btn btn-block btn-primary">
+
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Asset/login/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Asset/login/js/popper.min.js"></script>
+    <script src="~/Asset/login/js/bootstrap.min.js"></script>
+    <script src="~/Asset/login/js/main.js"></script>
+</body>
+</html>

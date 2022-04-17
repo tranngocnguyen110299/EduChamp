@@ -1,0 +1,193 @@
+﻿@model List<TN_academic.Models.AboutU>
+@{
+    ViewBag.Title = "About Us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Banner = "~/Content/assets/images/banner/banner2.jpg";
+    ViewBag.BannerText = "About Us";
+    ViewBag.AboutActive = "active";
+
+}
+@if (Model.Count > 0)
+{
+    <div class="content-block">
+        <div class="section-area section-sp1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 m-b30">
+                        <div class="feature-container">
+                            <div class="feature-md text-white m-b20">
+                                <a href="javascript:;" class="icon-cell"><img src="~/Content/assets/images/icon/icon1.png" alt="" /></a>
+                            </div>
+                            <div class="icon-content">
+                                <h5 class="ttr-tilte">Our Philosophy</h5>
+                                <p>A community of lifelong learners, responsible global citizens, and champions of our own success.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 m-b30">
+                        <div class="feature-container">
+                            <div class="feature-md text-white m-b20">
+                                <a href="javascript:;" class="icon-cell"><img src="~/Content/assets/images/icon/icon2.png" alt="" /></a>
+                            </div>
+                            <div class="icon-content">
+                                <h5 class="ttr-tilte">Kingster's Principle</h5>
+                                <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 m-b30">
+                        <div class="feature-container">
+                            <div class="feature-md text-white m-b20">
+                                <a href="javascript:;" class="icon-cell"><img src="~/Content/assets/images/icon/icon3.png" alt="" /></a>
+                            </div>
+                            <div class="icon-content">
+                                <h5 class="ttr-tilte">Key Of Success</h5>
+                                <p>The key to success is to focus our conscious mind on things we desire not things we fear.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 m-b30">
+                        <div class="feature-container">
+                            <div class="feature-md text-white m-b20">
+                                <a href="javascript:;" class="icon-cell"><img src="~/Content/assets/images/icon/icon4.png" alt="" /></a>
+                            </div>
+                            <div class="icon-content">
+                                <h5 class="ttr-tilte">Our Philosophy</h5>
+                                <p>A community of lifelong learners, responsible global citizens, and champions of our own success.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-area bg-gray section-sp1 our-story">
+            <div class="container">
+                <div class="row align-items-center d-flex">
+                    <div class="col-lg-8 col-md-12 heading-bx">
+                        <h2 class="m-b10">Our Story</h2>
+                        <h5 class="fw4">It is a long established fact that a reade.</h5>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                @Html.Raw(item.Description)
+                            }
+                        }
+
+                    </div>
+                    <div class="col-lg-4 col-md-12 heading-bx p-lr">
+                        <div class="video-bx">
+                            <img src="~/Content/assets/images/about/pic1.jpg" alt="" />
+                            <a href="https://www.youtube.com/watch?v=x_sJzVe9P_8" class="popup-youtube video"><i class="fa fa-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-area section-sp2 bg-fix ovbl-dark" style="background-image:url(~/Content/assets/images/background/bg1.jpg);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-white heading-bx left">
+                        <h2 class="title-head text-uppercase">covid-19 <span>statistics</span></h2>
+                        <p>Prime Minister Nguyen Xuan Phuc stated: “Fighting against the pandemic like fighting against an enemy".</p>
+                    </div>
+                </div>
+                <div class="testimonial-carousel owl-carousel owl-btn-1 col-12 p-lr0">
+                    <div class="item">
+                        <div class="testimonial-bx">
+                            <div class="testimonial-thumb">
+                                <img src="~/public/img/viet-nam-flag.png" />
+                            </div>
+                            <div class="testimonial-info">
+                                <h5 class="name">Viet Nam</h5>
+                                <p class="vnDate"></p>
+                            </div>
+                            <div class="testimonial-content">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <p>Total Confirmed:&nbsp; <big class="totalConfirmed text-danger" style="font-weight: bold"></big></p>
+                                            <p>New Confirmed:&nbsp; <big class="newConfirmed text-warning" style="font-weight: bold"></big></p>
+                                        </td>
+                                        <td>
+                                            <p>Total Deaths:&nbsp; <big class="totalDeaths text-info" style="font-weight: bold"></big></p>
+                                            <p>Total Recovered:&nbsp; <big class="totalRecovered text-success" style="font-weight: bold"></big></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimonial-bx">
+                            <div class="testimonial-thumb">
+                                <img src="~/public/img/global-logo.jpg" />
+                            </div>
+                            <div class="testimonial-info">
+                                <h5 class="name">Global</h5>
+                                <p class="globalDate"></p>
+                            </div>
+                            <div class="testimonial-content">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <p>Total Confirmed:<br /> <big class="globtotalConfirmed text-danger" style="font-weight: bold"></big></p>
+                                            <p>New Confirmed:<br /> <big class="globnewConfirmed text-warning" style="font-weight: bold"></big></p>
+                                        </td>
+                                        <td>
+                                            <p>Total Deaths:<br /> <big class="globtotalDeaths text-info" style="font-weight: bold"></big></p>
+                                            <p>Total Recovered:<br /> <big class="globtotalRecovered text-success" style="font-weight: bold"></big></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <section class="checkout spad">
+        <div class="container">
+            <h2 style="padding-top:5%;padding-bottom: 5%">Sorry! No results found!</h2>
+        </div>
+    </section>
+}
+
+@section ClientScript{
+    <script>
+        var settings = {
+            "url": "https://api.covid19api.com/summary",
+            "method": "GET",
+            "timeout": 0,
+            "headers": {
+                "X-Access-Token": "5cf9dfd5-3449-485e-b5ae-70a60e997864"
+            },
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+            $(".totalConfirmed").empty().append(response.Countries[184].TotalConfirmed);
+            $(".newConfirmed").empty().append(response.Countries[184].NewConfirmed);
+            $(".totalDeaths").empty().append(response.Countries[184].TotalDeaths);
+            $(".totalRecovered").empty().append(response.Countries[184].TotalRecovered);
+            date = new Date(response.Countries[184].Date);
+
+            $(".vnDate").empty().append(date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear());
+
+            $(".globtotalConfirmed").empty().append(response.Global.TotalConfirmed);
+            $(".globnewConfirmed").empty().append(response.Global.NewConfirmed);
+            $(".globtotalDeaths").empty().append(response.Global.TotalDeaths);
+            $(".globtotalRecovered").empty().append(response.Global.TotalRecovered);
+
+        });
+    </script>
+}

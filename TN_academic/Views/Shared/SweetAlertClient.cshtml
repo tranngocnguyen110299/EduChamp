@@ -1,0 +1,138 @@
+﻿@if (TempData[TN_academic.Common.CommonConstants.CREATE_SUCCESSFULLY] != null)
+{
+    <script>
+        toastr.success('Successfully created!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.REGISTER_SUCCESSFULLY] != null)
+{
+    <script>
+        toastr.success('Successfully registered!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.CREATE_FAILED] != null)
+{
+    <script>
+        toastr.error('Create failed. Try again, please!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.LOGIN_TO_WRITE_BLOG] != null)
+{
+    <script>
+        toastr.error('You must be logged in to write a blog!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.REGISTERED_COURSE] != null)
+{
+    <script>
+        toastr.info('You have registered this course');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.DELETE_SUCCESSFULLY] != null)
+{
+    <script>
+        toastr.success('Successfully deleted!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.DELETE_FAILED] != null)
+{
+    <script>
+        toastr.error('Data is being managed. You can not delete it.');
+    </script>
+}
+@if (TempData[TN_academic.Common.CommonConstants.NOTICE_COMPLETED_FORM] != null)
+{
+    <script>
+        toastr.error('Please fill the form before sending!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.SAVE_SUCCESSFULLY] != null)
+{
+    <script>
+        toastr.success('Your work has been saved!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.SAVE_FAILED] != null)
+{
+    <script>
+        toastr.error('Update failed. Try again, please!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.INVALID_AUDIO_EXTENSION] != null)
+{
+    <script>
+        toastr.error('The extension of the file has not accepted. The extension must be .mp3, .wav, .wma, .ogg, .pcm');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.INVALID_AUDIO_FILE_SIZE] != null)
+{
+    <script>
+        toastr.error('The File, which size greater than 1GB, has not accepted. Please try again!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.INVALID_IMAGE_EXTENSION] != null)
+{
+    <script>
+        toastr.error('The extension of the file has not accepted. The extension must be .png, .jpg, .jpeg');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.INVALID_IMAGE_FILE_SIZE] != null)
+{
+    <script>
+        toastr.error('The File, which size greater than 5MB, has not accepted. Please try again!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.LOGIN_TO_COMMENT] != null)
+{
+    <script>
+        toastr.info('You must be logged in to post a response.');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.INVALID_COMMENT] != null)
+{
+    <script>
+        toastr.error('You comment is invalid. Please try again!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.INVALID_BLOG_COMMENT] != null)
+{
+    <script>
+        toastr.error('You comment must be not empty!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.LOGIN_TO_LEARN] != null)
+{
+    <script>
+        toastr.error('You must be logged in to learn your courses!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.ACCESS_DENIED] != null)
+{
+    <script>
+        toastr.error('You do not have permission to access this page!');
+    </script>
+}
+
+@if (TempData[TN_academic.Common.CommonConstants.LOGIN_SUCCESSFULLY] != null)
+{
+    <script>
+        toastr.success('Successfully signed in.');
+    </script>
+}
